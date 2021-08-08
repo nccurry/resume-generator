@@ -113,15 +113,19 @@ html(lang='en')
               span.fa-li
                 i.fas.fa-angle-right
               | #{skill.details}
-      #education.sidebar-content
-        span.section-title Education
-        br
-        span.sub-section-title University of Tennessee
-        br
-        span(style='font-style: italic') Bachelor of Science in Mathematics
-        br
-        span(style='font-style: italic') Bachelor of Arts in Philosophy
-        br
+      if education
+        #education.sidebar-content
+          span.section-title Education
+          br
+          each degree in education
+            br
+            span.sub-section-title #{degree.school}
+            br
+            span #{degree.years}
+            br
+            span(style='font-style: italic') #{degree.degree}
+            br
+
       #certifications.sidebar-content
         span.section-title Certifications
         br

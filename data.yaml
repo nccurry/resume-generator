@@ -40,9 +40,16 @@ keySkills:
 # degree: Name of degree
 education:
 - school: University of Tennessee
+  years: '2006 - 2011'
   degree: Bachelor of Science in Mathematics
+  additionalDetails:
+  - 'Minor concentration in Statistics'
+  - 'Volunteer student mathematics tutor'
 - school: University of Tennessee
-  degree: Bachelor of Science in Mathematics
+  years: '2006 - 2011'
+  degree: Bachelor of Arts in Philosophy
+  additionalDetails:
+  - 'Lead Knoxville "Kant & Coffee" meetup group'
 
 certifications:
 - company: Red Hat
