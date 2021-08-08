@@ -5,7 +5,7 @@ name: Nicholas Curry
 bannerTitle: Consulting Architect
 
 # Contact information
-contact:
+contactInfo:
 - value: Nashville, TN
   faIconClass: "fas fa-map-marker-alt"
   link: https://maps.google.com/?q=Nashville%2C%20TN
@@ -14,7 +14,7 @@ contact:
   link: mailto:jobs@nickcurry.com
 - value: 615-502-0679
   faIconClass: "fas fa-mobile-alt"
-  link: tel:615-502-0679
+  link: tel:615-555-5555
 - value: nickcurry.com
   faIconClass: "fas fa-globe"
   link: https://nickcurry.com
@@ -27,13 +27,13 @@ contact:
 # description: Short description of skill
 keySkills:
 - title: Technical Leadership
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 - title: Cloud Infrastructure
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 - title: Software Development
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 - title: Container Orchestration
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 # Array of degrees
 # school: School name
