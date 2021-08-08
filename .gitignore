@@ -1,4 +1,5 @@
 node_modules
-template.html
+templates/template.html
 src/index.js
 .idea
+dist/*

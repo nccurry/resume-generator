@@ -1,0 +1,197 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title #{name}'s Resume
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
+    style.
+        body {
+            margin: 0;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: "Montserrat Medium", sans-serif;
+            font-size: x-small;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        ol {
+            margin: 0;
+        }
+        #root {
+            box-sizing: border-box;
+            display: grid;
+            grid-gap: 10px;
+            height: 100%;
+            width: 100%;
+            grid-template-columns: 250px auto;
+            grid-template-rows: auto 30px;
+            grid-template-areas:
+          "sidebar main"
+          "footer footer";
+        }
+
+        #sidebar {
+            grid-area: sidebar;
+            background: none;
+        }
+
+        #main {
+            grid-area: main;
+            background: none;
+            padding: 10px;
+        }
+
+        #footer {
+            grid-area: footer;
+            background: none;
+        }
+
+        .fa-ul {
+            margin-left: 30px
+        }
+
+        .sidebar-content {
+            background: #f5f6f5;
+            margin-bottom: 5px;
+            padding: 20px;
+            font-size: 10px;
+        }
+
+        .sidebar-your-name {
+            font-size: 26px;
+            color: #598547;
+        }
+
+        .sidebar-your-title {
+            font-size: 12px;
+        }
+
+        .main-content {
+            background: none;
+            margin: 10px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #598547;
+        }
+
+        .sub-section-title {
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+  #root
+    #sidebar
+      #name.sidebar-content
+        span.sidebar-your-name #{name}
+        br
+        span.sidebar-your-title #{bannerTitle}
+        br
+      #contact.sidebar-content
+        span.section-title Contact
+        br
+        ol.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-map-marker-alt
+            a(href='https://maps.google.com/?q=Nasvhille,TN') Nashville, TN
+          li
+            span.fa-li
+              i.fas.fa-envelope
+            a(href='mailto:jobs@nickcurry.com') jobs@nickcurry.com
+          li
+            span.fa-li
+              i.fas.fa-mobile-alt
+            a(href='tel:615-502-0679') 615-502-0679
+          li
+            span.fa-li
+              i.fas.fa-globe
+            a(href='https://nickcurry.com') nickcurry.com
+          li
+            span.fa-li
+              i.fab.fa-linkedin-in
+            a(href='https://linkedin.com/in/nicholasccurry') linkedin.com/in/nicholasccurry
+      #skills.sidebar-content
+        span.section-title Key Skills
+        br
+        span.sub-section-title Technical Leadership
+        br
+        ol.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-angle-right
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        span.sub-section-title Cloud Infrastructure
+        br
+        ol.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-angle-right
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        span.sub-section-title Software Development
+        br
+        ol.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-angle-right
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        span.sub-section-title Container Orchestration
+        br
+        ol.fa-ul
+          li
+            span.fa-li
+              i.fas.fa-angle-right
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      #education.sidebar-content
+        span.section-title Education
+        br
+        span.sub-section-title University of Tennessee
+        br
+        span(style='font-style: italic') Bachelor of Science in Mathematics
+        br
+        span(style='font-style: italic') Bachelor of Arts in Philosophy
+        br
+      #certifications.sidebar-content
+        span.section-title Certifications
+        br
+        span.sub-section-title Red Hat
+        br
+        span
+          a(href='https://www.redhat.com/rhtapps/certification/verify/?certId=170-088-231') License: 170-088-231
+        br
+        ol.fa-ul
+          li
+            span(style='font-style: italic') Certified System Administrator
+          li
+            span(style='font-style: italic') Certified Engineer
+          li
+            span(style='font-style: italic') Certified Architect
+        span.sub-section-title Amazon Web Services
+        br
+        span
+          a(href='https://www.certmetrics.com/amazon/public/badge.aspx?i=1&t=c&d=2018-01-04&ci=AWS00396798') Credential: 1JF1P9VKKJE11B92
+        br
+        ol.fa-ul
+          li
+            span(style='font-style: italic') Certified Solutions Architect
+      #awards.sidebar-content
+        span.section-title Awards
+    #main
+      #main-
+        #profile.main-content
+          span.section-title Profile
+          br
+          |             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      #experience.main-content
+        span.section-title Experience
+        br
+        span Red Hat
+        br
+        |           Architect
+  #footer
+    span
+      | Generating using my personal resume generator:
+      a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
