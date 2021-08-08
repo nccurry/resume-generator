@@ -1,28 +1,62 @@
 'use strict'
-import {write} from "fs";
-import {callbackify} from "util";
-
 const path = require("path")
 const puppeteer = require("puppeteer")
 const fs = require("fs")
 const yaml = require("js-yaml")
 const pug = require('pug');
 
-// Parse CLI arguments
-let resumeDataPath: String
-resumeDataPath = process.argv[2]
-if (!resumeDataPath) {
-    throw new Error('You must supply the file path to the file containing the resume data.')
+interface ResumeData {
+    name: string
+    bannerTitle: string
+    contact: {
+        address?: string
+        encodedAddress?: string
+        email?: string
+        phone?: string
+        website?: string
+        linkedin?: string
+    }
+    keySkills: Array<any>
+    education: Array<any>
+    certifications: Array<any>
+    awards: Array<any>
+    [key: string]: any
 }
 
-// Generate html from yaml
-let resumeData: Object
-try {
-  resumeData = yaml.load(fs.readFileSync(resumeDataPath, 'utf8'))
-} catch (e) {
-  console.error('There was a problem parsing ' + resumeDataPath)
-  throw new Error(e)
+function parseCliArguments(argv: Array<string>): string | Error {
+    let resumeDataPath: string
+    resumeDataPath = process.argv[2]
+    if (!resumeDataPath) {
+        return Error('You must supply the file path to the file containing the resume data.')
+    }
+    return resumeDataPath
 }
+
+function getResumeData(filePath: string): ResumeData | Error {
+    let resumeData: ResumeData
+    try {
+        resumeData = yaml.load(fs.readFileSync(resumeDataPath, 'utf8'))
+    } catch (e) {
+        return e
+    }
+    return resumeData
+}
+
+let resumeDataPath = parseCliArguments(process.argv)
+if (resumeDataPath instanceof Error) {
+    console.error('There was a problem parsing the CLI arguments')
+    console.error(resumeDataPath)
+    process.exit(1)
+}
+
+let resumeData = getResumeData(resumeDataPath)
+if (resumeData instanceof Error) {
+    console.error('There was a problem parsing the resume data in file ' + resumeDataPath)
+    console.error(resumeData)
+    process.exit(1)
+}
+
+
 
 const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/template.pug'))
 

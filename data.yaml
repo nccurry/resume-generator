@@ -6,11 +6,21 @@ bannerTitle: Consulting Architect
 
 # Contact information
 contact:
-  address: Nashville, TN
-  email: jobs@nickcurry.com
-  phone: 615-502-0679
-  website: nickcurry.com
-  linkedin: linkedin.com/in/nicholasccurry
+- value: Nashville, TN
+  faIconClass: "fas fa-map-marker-alt"
+  link: https://maps.google.com/?q=Nashville%2C%20TN
+- value: jobs@nickcurry.com
+  faIconClass: "fas fa-envelope"
+  link: mailto:jobs@nickcurry.com
+- value: 615-502-0679
+  faIconClass: "fas fa-mobile-alt"
+  link: tel:615-502-0679
+- value: nickcurry.com
+  faIconClass: "fas fa-globe"
+  link: https://nickcurry.com
+- value: linkedin.com/in/nicholasccurry
+  faIconClass: "fab fa-linkedin-in"
+  link: https://linkedin.com/in/nicholasccurry
 
 # Array of key skills
 # title: Title of skill - e.g. Golang

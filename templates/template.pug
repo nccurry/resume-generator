@@ -90,30 +90,16 @@ html(lang='en')
         br
         span.sidebar-your-title #{bannerTitle}
         br
-      #contact.sidebar-content
-        span.section-title Contact
-        br
-        ol.fa-ul
-          li
-            span.fa-li
-              i.fas.fa-map-marker-alt
-            a(href='https://maps.google.com/?q=Nasvhille,TN') Nashville, TN
-          li
-            span.fa-li
-              i.fas.fa-envelope
-            a(href='mailto:jobs@nickcurry.com') jobs@nickcurry.com
-          li
-            span.fa-li
-              i.fas.fa-mobile-alt
-            a(href='tel:615-502-0679') 615-502-0679
-          li
-            span.fa-li
-              i.fas.fa-globe
-            a(href='https://nickcurry.com') nickcurry.com
-          li
-            span.fa-li
-              i.fab.fa-linkedin-in
-            a(href='https://linkedin.com/in/nicholasccurry') linkedin.com/in/nicholasccurry
+      if contact
+        #contact.sidebar-content
+          span.section-title Contact
+          br
+          ol.fa-ul
+            each val in contact
+              li
+                span.fa-li
+                  i(class=val.faIconClass)
+                a(href=val.link) #{val.value}
       #skills.sidebar-content
         span.section-title Key Skills
         br
