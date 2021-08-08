@@ -16,8 +16,10 @@ html(lang='en')
             text-decoration: none;
             color: black;
         }
-        ol {
-            margin: 0;
+        ul {
+            margin: 0 0 0 15px;
+            padding: 0 0 0 0;
+            list-style-type: none;
         }
         #root {
             box-sizing: border-box;
@@ -105,14 +107,16 @@ html(lang='en')
       #skills.sidebar-content
         span.section-title Key Skills
         br
+        br
         each skill in keySkills
           span.sub-section-title #{skill.title}
           br
-          ol.fa-ul
+          ul
             li
-              span.fa-li
-                i.fas.fa-angle-right
+              span
+                i
               | #{skill.details}
+          br
       if education
         #education.sidebar-content
           span.section-title Education
@@ -125,44 +129,57 @@ html(lang='en')
             br
             span(style='font-style: italic') #{degree.degree}
             br
-
+            each detail in degree.additionalDetails
+              ul
+                li
+                span #{detail}
+      if certifications
       #certifications.sidebar-content
         span.section-title Certifications
         br
-        span.sub-section-title Red Hat
-        br
-        span
-          a(href='https://www.redhat.com/rhtapps/certification/verify/?certId=170-088-231') License: 170-088-231
-        br
-        ol.fa-ul
-          li
-            span(style='font-style: italic') Certified System Administrator
-          li
-            span(style='font-style: italic') Certified Engineer
-          li
-            span(style='font-style: italic') Certified Architect
-        span.sub-section-title Amazon Web Services
-        br
-        span
-          a(href='https://www.certmetrics.com/amazon/public/badge.aspx?i=1&t=c&d=2018-01-04&ci=AWS00396798') Credential: 1JF1P9VKKJE11B92
-        br
-        ol.fa-ul
-          li
-            span(style='font-style: italic') Certified Solutions Architect
-      #awards.sidebar-content
-        span.section-title Awards
+        each certification in certifications
+          br
+          span.sub-section-title #{certification.company}
+          br
+          span
+            a(href=certification.link) #{certification.id}
+          br
+          ul
+            each individualCert in certification.list
+              li
+                span(style='font-style: italic') #{individualCert}
+
+
     #main
-      #main-
+      if profile
         #profile.main-content
           span.section-title Profile
           br
-          |             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      #experience.main-content
-        span.section-title Experience
-        br
-        span Red Hat
-        br
-        |           Architect
+          span #{profile}
+
+      if experience
+        #experience.main-content
+          span.section-title Experience
+          br
+          each job in experience
+            span(style="font-weight: 900") #{job.company}&nbsp;-&nbsp;
+            span #{job.title}:&nbsp;
+            span #{job.timeFrame}
+            br
+            if job.details
+              ul
+                each detail in job.details
+                  li
+                    span #{detail}
+
+
+
+      if projects
+        #projects.main-content
+          span.section-title Projects
+          br
+          span test
+
   #footer
     span
       | Generating using my personal resume generator:

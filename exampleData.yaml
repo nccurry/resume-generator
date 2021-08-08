@@ -1,0 +1,84 @@
+# Your name
+name: Jane Smith
+
+# Title shown in banner
+bannerTitle: Mrs. Manager
+
+# Paragraph summarizing your profile
+profile: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+# Contact information
+contactInfo:
+- value: City, ST
+  faIconClass: "fas fa-map-marker-alt"
+  link: https://maps.google.com/?q=City%2C%20ST
+- value: email@example.com
+  faIconClass: "fas fa-envelope"
+  link: mailto:email@example.com
+- value: 555-555-5555
+  faIconClass: "fas fa-mobile-alt"
+  link: tel:555-555-5555
+- value: example.com
+  faIconClass: "fas fa-globe"
+  link: https://example.com
+- value: linkedin.com/in/janesmith
+  faIconClass: "fab fa-linkedin-in"
+  link: https://linkedin.com/in/janesmith
+
+# Array of key skills
+# title: Title of skill - e.g. Golang
+# description: Short description of skill
+keySkills:
+- title: Technical Leadership
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Cloud Infrastructure
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Software Development
+  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+# Array of degrees
+# school: School name
+# degree: Name of degree
+education:
+- school: University of State
+  years: '2006 - 2011'
+  degree: Bachelor of Science in Field
+  additionalDetails:
+  - '3.26 GPA'
+  - 'Minor concentration in Subfield'
+  - 'Volunteer student tutor'
+  - 'Honors society'
+- school: University of Other State
+  years: '2006 - 2011'
+  degree: Master's in Field
+  additionalDetails:
+  - '3.87 GPA'
+  - 'Lead meetup group'
+
+certifications:
+- company: Large Corporation
+  id: 'License: 111-222-333'
+  link: 'https://example.com?license=111-222-333'
+  list:
+  - Certified Manager
+  - Certified Individual Contributor
+  - Certified Architect
+- company: Niche Website
+  id: 'Credential: 1674939a93hg9'
+  link: 'https://niche.com?1674939a93hg9'
+  list:
+  - Certified Web Developer
+
+experience:
+- company: Niche Corporation
+  title: Mrs. Manager
+  timeFrame: 2019 - 2021
+  details:
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- company: Red Hat
+  title: Senior Consultant
+  timeFrame: 2018 - 2019
+  details:
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
