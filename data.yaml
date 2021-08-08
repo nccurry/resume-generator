@@ -1,0 +1,51 @@
+# Your name
+name: Nicholas Curry
+
+# Title shown in banner
+currentTitle: Consulting Architect
+
+# Contact information
+contact:
+  address: Nashville, TN
+  email: jobs@nickcurry.com
+  phone: 615-502-0679
+  website: nickcurry.com
+  linkedin: linkedin.com/in/nicholasccurry
+
+# Array of key skills
+# title: Title of skill - e.g. Golang
+# description: Short description of skill
+keySkills:
+- title: Technical Leadership
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Cloud Infrastructure
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Software Development
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Container Orchestration
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+# Array of degrees
+# school: School name
+# degree: Name of degree
+education:
+- school: University of Tennessee
+  degree: Bachelor of Science in Mathematics
+- school: University of Tennessee
+  degree: Bachelor of Science in Mathematics
+
+certifications:
+- company: Red Hat
+  certificationId: 'License: 170-088-231'
+  certificationLink: 'https://www.redhat.com/rhtapps/certification/verify/?certId=170-088-231'
+  certifications:
+  - Certified System Administrator
+  - Certified Engineer
+  - Certified Architect
+- company: Amazon Web Services
+  certificationId: 'Credential: 1JF1P9VKKJE11B92'
+  certificationLink: 'https://www.certmetrics.com/amazon/public/badge.aspx?i=1&t=c&d=2018-01-04&ci=AWS00396798'
+  certifications:
+  - Certified Solutions Architect
+awards:
+
