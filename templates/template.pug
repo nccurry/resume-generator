@@ -149,11 +149,11 @@ html(lang='en')
               li
                 span(style='font-style: italic') #{individualCert}
 
-
     #main
       if profile
         #profile.main-content
           span.section-title Profile
+          br
           br
           span #{profile}
 
@@ -162,9 +162,11 @@ html(lang='en')
           span.section-title Experience
           br
           each job in experience
-            span(style="font-weight: 900") #{job.company}&nbsp;-&nbsp;
-            span #{job.title}:&nbsp;
-            span #{job.timeFrame}
+            br
+            span #{job.timeFrame}&nbsp;&nbsp;&nbsp;&nbsp;
+            span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
+            span #{job.title}
+
             br
             if job.details
               ul
@@ -173,12 +175,17 @@ html(lang='en')
                     span #{detail}
 
 
-
       if projects
         #projects.main-content
           span.section-title Projects
           br
-          span test
+          each project in projects
+            span #{project.headline}
+            ul
+              each detail in project.additionalDetails
+                li
+                  span #{detail}
+            br
 
   #footer
     span
