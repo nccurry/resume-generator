@@ -40,18 +40,17 @@ html(lang='en')
           "sidebar main"
           "sidebar footer";
         }
-
         #sidebar {
             grid-area: sidebar;
             background: none;
             display: flex;
             flex-flow: column;
         }
-
         #main {
             grid-area: main;
             background: none;
             padding: 10px;
+            font-size: 12px;
         }
         #padding {
             flex: auto;
@@ -78,29 +77,24 @@ html(lang='en')
         .sidebar-content {
             background: #f5f6f5;
             margin-bottom: 5px;
-            padding: 20px;
+            padding: 10px;
             font-size: 10px;
         }
-
         .sidebar-your-name {
             font-size: 26px;
             color: #598547;
         }
-
         .sidebar-your-title {
             font-size: 12px;
         }
-
         .main-content {
             background: none;
             margin: 10px;
         }
-
         .section-title {
             font-size: 20px;
             color: #598547;
         }
-
         .sub-section-title {
             font-size: 12px;
             font-weight: 900;
@@ -143,7 +137,6 @@ html(lang='en')
       if education
         #education.sidebar-content
           span.section-title Education
-          br
           each degree in education
             br
             span.sub-section-title #{degree.school}
@@ -162,7 +155,6 @@ html(lang='en')
       if certifications
       #certifications.sidebar-content
         span.section-title Certifications
-        br
         each certification in certifications
           br
           span.sub-section-title #{certification.company}
@@ -177,6 +169,20 @@ html(lang='en')
                   i(class='fas fa-chevron-right fa-xs')
                 span #{individualCert}
 
+      if hobbies
+      #hobbies.sidebar-content
+        span.section-title Hobbies
+        each hobby in hobbies
+          br
+          span #{hobby.headline}
+          br
+          ul.fa-ul
+            each detail in hobby.additionalDetails
+              li
+                span.fa-li
+                  i(class='fas fa-chevron-right fa-xs')
+                span #{detail}
+
       // Takes sidebar down to the bottom of the page
       #padding.sidebar-content
 
@@ -185,7 +191,6 @@ html(lang='en')
       if profile
         #profile.main-content
           span.section-title Profile
-          br
           br
           span #{profile}
 

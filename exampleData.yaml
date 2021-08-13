@@ -1,13 +1,14 @@
-# Your name
+# Leaving any variable blank will remove it's
+# corresponding section from the generated resume.
+
+# Sidebar
+
+# Your name shown in the top right
 name: Jane Smith
 
-# Title shown in banner
+# Title shown in banner underneath your name
 bannerTitle: Mrs. Manager
 
-# Paragraph summarizing your profile
-profile: Experienced professional with over 15 years of experience in multiple relevant industries. I love painting ocean imagery, crafting wooden furniture, and bungee jumping. I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
-
-# Contact information
 contactInfo:
 - value: City, ST
   faIconClass: "fas fa-map-marker-alt"
@@ -25,9 +26,6 @@ contactInfo:
   faIconClass: "fab fa-linkedin-in"
   link: https://linkedin.com/in/janesmith
 
-# Array of key skills
-# title: Title of skill - e.g. Golang
-# description: Short description of skill
 keySkills:
 - title: Finger Painting
   details: Whether its an eagle or a beagle, I can evoke a real sense of "Hmm... I'm not sure about that".
@@ -36,9 +34,6 @@ keySkills:
 - title: Yak Shaving
   details: I am able to stay focused and dedicated, no matter how tedious or pointless the task.
 
-# Array of degrees
-# school: School name
-# degree: Name of degree
 education:
 - school: University of State
   years: '2006 - 2011'
@@ -66,6 +61,22 @@ certifications:
   link: 'https://niche.com?1674939a93hg9'
   list:
   - Certified Web Developer
+
+hobbies:
+- headline: Bloons TD 6
+  additionalDetails:
+  - Still working on Bloonarius the Inflator
+  - Don't sleep on the alchemist monkey
+- headline: Raging against the machine
+  additionalDetails:
+  - Some of those that work forces...
+- headline: Puppy boxing
+  additionalDetails:
+  - They're as rutheless as they are cute
+
+# Main
+
+profile: Experienced professional with over 15 years of experience in multiple relevant industries. I love painting ocean imagery, crafting wooden furniture, and bungee jumping. I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
 
 experience:
 - company: Recognizable Corporation
