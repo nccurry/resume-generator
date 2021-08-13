@@ -6,6 +6,8 @@ const fs = require("fs")
 const yaml = require("js-yaml")
 const pug = require('pug');
 
+// Types and helper functions
+
 interface ResumeData {
     name: string
     bannerTitle: string
@@ -47,11 +49,12 @@ interface cliArgs {
     generatePdf: boolean
 }
 
-function parseCliArguments(argv: Array<string>): cliArgs | Error {
+function parseCliArguments(argv: Array<string>): cliArgs {
     let resumeDataPath: string
     resumeDataPath = process.argv[2]
     if (!resumeDataPath) {
-        return Error('You must supply the file path to the file containing the resume data.')
+        console.error('You must supply the file path to the file containing the resume data.')
+        process.exit(1)
     }
 
     let generatePdf: boolean
@@ -64,40 +67,16 @@ function parseCliArguments(argv: Array<string>): cliArgs | Error {
     return { resumeDataPath, generatePdf }
 }
 
-function getResumeData(filePath: string): ResumeData | Error {
+function getResumeData(filePath: string): ResumeData {
     let resumeData: ResumeData
     try {
         resumeData = yaml.load(fs.readFileSync(filePath, 'utf8'))
     } catch (e) {
-        return e
+        console.error('There was a problem reading resume data from file ' + filePath)
+        console.error(e)
+        process.exit(1)
     }
     return resumeData
-}
-
-// Generate Resume
-
-let args = parseCliArguments(process.argv)
-if (args instanceof Error) {
-    console.error('There was a problem parsing the CLI arguments')
-    console.error(args)
-    process.exit(1)
-}
-
-let resumeData = getResumeData(args.resumeDataPath)
-if (resumeData instanceof Error) {
-    console.error('There was a problem parsing the resume data in file ' + args.resumeDataPath)
-    console.error(resumeData)
-    process.exit(1)
-}
-
-const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/template.pug'))
-
-let resumeHtml: string
-try {
-  resumeHtml = compiledFunction(resumeData)
-} catch (e) {
-    console.error('There was a problem compiling the resume pug template templates/template.pug')
-    throw new Error(e)
 }
 
 let pdfOptions: PDFOptions = {
@@ -115,32 +94,50 @@ let pdfOptions: PDFOptions = {
 let generatePdf = function (generate: boolean) {
     // https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md#pagepdfoptions
 
-    // TODO: Make this pretty
-    // if (generate) {
-    //     try {
-    //         const browser = await puppeteer.launch();
-    //         const page = await browser.newPage();
-    //         await page.goto(
-    //             `file:${path.join(__dirname, '../dist/resume.html')}`,
-    //             { waitUntil: 'networkidle0'}
-    //         );
-    //         await page.pdf(pdfOptions);
-    //         await browser.close();
-    //     } catch (e) {
-    //         return new Error(e)
-    //     }
-    // }
-
-    (async() => {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.goto(
-            `file:${path.join(__dirname, '../dist/resume.html')}`,
-            { waitUntil: 'networkidle0'}
-        );
-        await page.pdf(pdfOptions);
-        await browser.close();
-    })();
+    if (generate) {
+        (async () => {
+            try {
+                const browser = await puppeteer.launch();
+                const page = await browser.newPage();
+                await page.goto(
+                    `file:${path.join(__dirname, '../dist/resume.html')}`,
+                    { waitUntil: 'networkidle0'}
+                );
+                await page.pdf(pdfOptions);
+                await browser.close();
+            } catch (e) {
+                console.log(e)
+                process.exit(1)
+            }
+        })()
+    }
 }
 
-fs.writeFile(path.join(__dirname, '../dist/resume.html'), resumeHtml, generatePdf)
+let compileHtml = function (compiledFunction: Function, resumeData: ResumeData): string {
+    let resumeHtml: string
+    try {
+        resumeHtml = compiledFunction(resumeData)
+    } catch (e) {
+        console.error('There was a problem compiling the resume pug template templates/template.pug')
+        console.error(e)
+        process.exit(1)
+    }
+
+    return resumeHtml
+}
+
+// Core logic
+
+let args = parseCliArguments(process.argv)
+
+let resumeData = getResumeData(args.resumeDataPath)
+
+const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/template.pug'))
+
+let resumeHtml = compileHtml(compiledFunction, resumeData)
+
+fs.writeFile(
+    path.join(__dirname, '../dist/resume.html'),
+    resumeHtml,
+    generatePdf
+)
