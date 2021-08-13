@@ -5,7 +5,7 @@ name: Jane Smith
 bannerTitle: Mrs. Manager
 
 # Paragraph summarizing your profile
-profile: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+profile: Experienced professional with over 15 years of experience in multiple relevant industries. I love painting ocean imagery, crafting wooden furniture, and bungee jumping. I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
 
 # Contact information
 contactInfo:
@@ -15,9 +15,9 @@ contactInfo:
 - value: email@example.com
   faIconClass: "fas fa-envelope"
   link: mailto:email@example.com
-- value: 555-555-5555
+- value: 555-555-4193
   faIconClass: "fas fa-mobile-alt"
-  link: tel:555-555-5555
+  link: tel:555-555-4193
 - value: example.com
   faIconClass: "fas fa-globe"
   link: https://example.com
@@ -76,15 +76,31 @@ experience:
   details:
   - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- company: Major Airline
+  title: Ring Leader
+  timeFrame: 2018 - 2019
+  details:
+- company: Cola Factory
+  title: Taste Tester
+  timeFrame: 2016 - 2018
+  details:
 - company: Local Business
   title: Senior Doer
-  timeFrame: 2018 - 2019
+  timeFrame: 2013 - 2018
   details:
   - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - test
+  - other thing other thing
+  - adskfl;asdf;lakjsdf;lkasjdf;lkasjdflk;j
 
 projects:
 - headline: Super awesome project
+  keyTechnologies:
+  - Azure
+  - Terraform
+  - AMQ Streams
+  - Java
   additionalDetails:
   - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
   - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'

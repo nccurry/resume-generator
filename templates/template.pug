@@ -51,9 +51,13 @@ html(lang='en')
         }
 
         .fa-ul {
-            margin-left: 30px
+            margin-left: 20px
         }
-
+        .fa-xs {
+            /* Ensures the fa-xs icons are centered */
+            position: relative;
+            transform: translateY(-6%);
+        }
         .sidebar-content {
             background: #f5f6f5;
             margin-bottom: 5px;
@@ -93,30 +97,32 @@ html(lang='en')
         if bannerTitle
           span.sidebar-your-title #{bannerTitle}
           br
+
       if contactInfo
         #contact.sidebar-content
-          span.section-title Contact
+          span.section-title Contact Info
           br
-          ol.fa-ul
+          ul.fa-ul
             each info in contactInfo
               li
                 span.fa-li
                   i(class=info.faIconClass)
                 a(href=info.link) #{info.value}
+
       if keySkills
       #skills.sidebar-content
         span.section-title Key Skills
         br
-        br
         each skill in keySkills
           span.sub-section-title #{skill.title}
           br
-          ul
+          ul.fa-ul
             li
-              span
-                i
-              | #{skill.details}
+              span.fa-li
+                i(class='fas fa-chevron-right fa-xs')
+              span #{skill.details}
           br
+
       if education
         #education.sidebar-content
           span.section-title Education
@@ -130,9 +136,12 @@ html(lang='en')
             span(style='font-style: italic') #{degree.degree}
             br
             each detail in degree.additionalDetails
-              ul
+              ul.fa-ul
                 li
-                span #{detail}
+                  span.fa-li
+                    i(class='fas fa-chevron-right fa-xs')
+                  span #{detail}
+
       if certifications
       #certifications.sidebar-content
         span.section-title Certifications
@@ -144,10 +153,12 @@ html(lang='en')
           span
             a(href=certification.link) #{certification.id}
           br
-          ul
+          ul.fa-ul
             each individualCert in certification.list
               li
-                span(style='font-style: italic') #{individualCert}
+                span.fa-li
+                  i(class='fas fa-chevron-right fa-xs')
+                span #{individualCert}
 
     #main
       if profile
@@ -162,18 +173,20 @@ html(lang='en')
           span.section-title Experience
           br
           each job in experience
-            br
             span #{job.timeFrame}&nbsp;&nbsp;&nbsp;&nbsp;
             span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
             span #{job.title}
-
-            br
             if job.details
-              ul
+              ul.fa-ul
                 each detail in job.details
                   li
+                    span.fa-li
+                      i(class='fas fa-chevron-right fa-xs')
                     span #{detail}
-
+            else
+              // For some reason this _removes_ a br after the ul
+              br
+            br
 
       if projects
         #projects.main-content
@@ -181,9 +194,12 @@ html(lang='en')
           br
           each project in projects
             span #{project.headline}
-            ul
+            br
+            ul.fa-ul
               each detail in project.additionalDetails
                 li
+                  span.fa-li
+                    i(class='fas fa-chevron-right fa-xs')
                   span #{detail}
             br
 
