@@ -5,10 +5,15 @@ html(lang='en')
     title #{name}'s Resume
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
     style.
+        html {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+        }
         body {
             margin: 0;
-            padding-left: 10px;
-            padding-right: 10px;
+            height: 100vh;
+            width: 100vw;
             font-family: "Montserrat Medium", sans-serif;
             font-size: x-small;
         }
@@ -25,18 +30,22 @@ html(lang='en')
             box-sizing: border-box;
             display: grid;
             grid-gap: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
             height: 100%;
             width: 100%;
             grid-template-columns: 250px auto;
             grid-template-rows: auto 30px;
             grid-template-areas:
           "sidebar main"
-          "footer footer";
+          "sidebar footer";
         }
 
         #sidebar {
             grid-area: sidebar;
             background: none;
+            display: flex;
+            flex-flow: column;
         }
 
         #main {
@@ -44,16 +53,20 @@ html(lang='en')
             background: none;
             padding: 10px;
         }
-
+        #padding {
+            flex: auto;
+            margin-bottom: 0;
+        }
         #footer {
             grid-area: footer;
             background: none;
             /* center text */
             display: flex;
             justify-content: center;
-            align-items: center
+            align-items: center;
+            font-size: xx-small;
+            font-style: italic;
         }
-
         .fa-ul {
             margin-left: 20px
         }
@@ -164,6 +177,10 @@ html(lang='en')
                   i(class='fas fa-chevron-right fa-xs')
                 span #{individualCert}
 
+      // Takes sidebar down to the bottom of the page
+      #padding.sidebar-content
+
+
     #main
       if profile
         #profile.main-content
@@ -207,6 +224,6 @@ html(lang='en')
                   span #{detail}
             br
 
-  #footer
-    span Generating using my personal resume generator:&nbsp;
-    a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+    #footer
+      span Generating using my resume generator:&nbsp;
+      a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator

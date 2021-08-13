@@ -56,8 +56,6 @@ if (resumeData instanceof Error) {
     process.exit(1)
 }
 
-
-
 const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/template.pug'))
 
 let resumeHtml: string
@@ -69,33 +67,28 @@ try {
 }
 
 let generatePdf = function () {
-    console.log('test')
+    // https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md#pagepdfoptions
+
+    (async() => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(
+            `file:${path.join(__dirname, '../dist/resume.html')}`,
+            { waitUntil: 'networkidle0'}
+        );
+        await page.pdf({
+            path: `${path.join(__dirname, '../dist/resume.pdf')}`,
+            format: 'A4',
+            margin: {
+                top: "0px",
+                left: "0px",
+                right: "0px",
+                bottom: "0px"
+            },
+            printBackground: true
+        });
+        await browser.close();
+    })();
 }
 
 fs.writeFile(path.join(__dirname, '../dist/resume.html'), resumeHtml, generatePdf)
-
-
-// https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md#pagepdfoptions
-//
-// (async() => {
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto(
-//     `file:${path.join(__dirname, 'template.html')}`,
-//     { waitUntil: 'networkidle0'}
-//     );
-//     await page.pdf({
-//         path: 'test.pdf',
-//         format: 'A4',
-//         margin: {
-//             top: "0px",
-//             left: "0px",
-//             right: "0px",
-//             bottom: "0px"
-//         },
-//         printBackground: true
-//     });
-//     await browser.close();
-// })();
-
-export {}
