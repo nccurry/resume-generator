@@ -29,12 +29,12 @@ contactInfo:
 # title: Title of skill - e.g. Golang
 # description: Short description of skill
 keySkills:
-- title: Technical Leadership
-  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-- title: Cloud Infrastructure
-  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-- title: Software Development
-  details: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+- title: Finger Painting
+  details: Whether its an eagle or a beagle, I can evoke a real sense of "Hmm... I'm not sure about that".
+- title: Bike Shedding
+  details: I take driving the conversation sideways seriously and have won multiple industry recognizing my achievments.
+- title: Yak Shaving
+  details: I am able to stay focused and dedicated, no matter how tedious or pointless the task.
 
 # Array of degrees
 # school: School name
@@ -42,18 +42,17 @@ keySkills:
 education:
 - school: University of State
   years: '2006 - 2011'
-  degree: Bachelor of Science in Field
+  degree: Bachelor of Science in Cake Decorating
   additionalDetails:
   - '3.26 GPA'
-  - 'Minor concentration in Subfield'
-  - 'Volunteer student tutor'
-  - 'Honors society'
+  - 'Minor concentration in Icing Art'
+  - 'Volunteer student'
 - school: University of Other State
   years: '2006 - 2011'
   degree: Master's in Field
   additionalDetails:
   - '3.87 GPA'
-  - 'Lead meetup group'
+  - 'Lead hot-dog eaters meetup group'
 
 certifications:
 - company: Large Corporation
@@ -62,7 +61,6 @@ certifications:
   list:
   - Certified Manager
   - Certified Individual Contributor
-  - Certified Architect
 - company: Niche Website
   id: 'Credential: 1674939a93hg9'
   link: 'https://niche.com?1674939a93hg9'
@@ -70,12 +68,13 @@ certifications:
   - Certified Web Developer
 
 experience:
-- company: Niche Corporation
+- company: Recognizable Corporation
   title: Mrs. Manager
   timeFrame: 2019 - 2021
   details:
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - Lead major team to success through innovative breathing techniques
+  - Use Microsoft Teams in ways the developers could never have forseen
+  - Increased synergy by 37% across four industry verticals
 - company: Major Airline
   title: Ring Leader
   timeFrame: 2018 - 2019
@@ -88,28 +87,25 @@ experience:
   title: Senior Doer
   timeFrame: 2013 - 2018
   details:
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  - test
-  - other thing other thing
-  - adskfl;asdf;lakjsdf;lkasjdf;lkasjdflk;j
+  - Third best person on my team
+  - Told a pretty funny joke to the CTO at the 2015 holiday party
+  - Was part of a group of 17 people who avoided getting made redundant in 2014
 
 projects:
-- headline: Super awesome project
-  keyTechnologies:
-  - Azure
-  - Terraform
-  - AMQ Streams
-  - Java
+- headline: Migration to marginally better vendor
   additionalDetails:
-  - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-- headline: Super awesome project
+  - Replaced old vendor technology with a new one that does the same thing
+  - Worked late nights and weekends, but had Tuesdays off
+- headline: Downgraded accounting systems
   additionalDetails:
-    - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-- headline: Super awesome project
+  - Was able to keep myself on mute for all teleconference meetings
+  - Reintroduce pen and paper as part of our standard offering
+- headline: Painted cafeteria mural
   additionalDetails:
-  - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-  - 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  - Paintined incredible mixed-media mural of a beagle with eagle wings
+  - Was told by at least three people that they are pretty sure they like it better than the original landlord beige wall
+- headline: Held Pancake Social
+  additionalDetails:
+  - Cooked brats and pancakes for the North American Public Sector division
+  - Purchased a bounce house for everyone
+  - Arranged syncronized 'Lord of the Dance' style competition

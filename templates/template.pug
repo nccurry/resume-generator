@@ -48,6 +48,10 @@ html(lang='en')
         #footer {
             grid-area: footer;
             background: none;
+            /* center text */
+            display: flex;
+            justify-content: center;
+            align-items: center
         }
 
         .fa-ul {
@@ -204,6 +208,5 @@ html(lang='en')
             br
 
   #footer
-    span
-      | Generating using my personal resume generator:
-      a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+    span Generating using my personal resume generator:&nbsp;
+    a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
