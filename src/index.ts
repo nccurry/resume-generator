@@ -50,21 +50,22 @@ interface cliArgs {
 }
 
 function parseCliArguments(argv: Array<string>): cliArgs {
-    let resumeDataPath: string
-    resumeDataPath = process.argv[2]
-    if (!resumeDataPath) {
+    let cliArgs = {
+        resumeDataPath: '',
+        generatePdf: true
+    }
+
+    cliArgs.resumeDataPath = process.argv[2]
+    if (!cliArgs.resumeDataPath) {
         console.error('You must supply the file path to the file containing the resume data.')
         process.exit(1)
     }
 
-    let generatePdf: boolean
-    if (generatePdf) {
-        generatePdf = argv[3] === 'true'
-    } else {
-        generatePdf = true
+    if (argv[3]) {
+        cliArgs.generatePdf = argv[3] === 'true'
     }
 
-    return { resumeDataPath, generatePdf }
+    return cliArgs
 }
 
 function getResumeData(filePath: string): ResumeData {
@@ -79,38 +80,43 @@ function getResumeData(filePath: string): ResumeData {
     return resumeData
 }
 
-let pdfOptions: PDFOptions = {
-    path: `${path.join(__dirname, '../dist/resume.pdf')}`,
-    format: 'a4',
-    margin: {
-        top: "0px",
-        left: "0px",
-        right: "0px",
-        bottom: "0px"
-    },
-    printBackground: true
-}
-
-let generatePdf = function (generate: boolean) {
+// Little currying action to return the callback function
+// Probably a code smell
+let generatePdfCallback = function (generatePdf: boolean, fileName: string): Function {
     // https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md#pagepdfoptions
-
-    if (generate) {
-        (async () => {
-            try {
-                const browser = await puppeteer.launch();
-                const page = await browser.newPage();
-                await page.goto(
-                    `file:${path.join(__dirname, '../dist/resume.html')}`,
-                    { waitUntil: 'networkidle0'}
-                );
-                await page.pdf(pdfOptions);
-                await browser.close();
-            } catch (e) {
-                console.log(e)
-                process.exit(1)
-            }
-        })()
+    let pdfOptions: PDFOptions = {
+        path: `${path.join(__dirname, `../dist/${fileName}.pdf`)}`,
+        format: 'a4',
+        margin: {
+            top: "0px",
+            left: "0px",
+            right: "0px",
+            bottom: "0px"
+        },
+        printBackground: true
     }
+
+    if (generatePdf) {
+        return function () {
+            // Anonymous function to skirt around nested asyncrony
+            (async () => {
+                try {
+                    const browser = await puppeteer.launch();
+                    const page = await browser.newPage();
+                    await page.goto(
+                        `file:${path.join(__dirname, `../dist/${fileName}.html`)}`,
+                        {waitUntil: 'networkidle0'}
+                    );
+                    await page.pdf(pdfOptions);
+                    await browser.close();
+                } catch (e) {
+                    console.log(e)
+                    process.exit(1)
+                }
+            })()
+        }
+    }
+    return () => {}
 }
 
 let compileHtml = function (compiledFunction: Function, resumeData: ResumeData): string {
@@ -126,6 +132,16 @@ let compileHtml = function (compiledFunction: Function, resumeData: ResumeData):
     return resumeHtml
 }
 
+let extractFileName = function(resumeDataPath: string): string {
+    let regex = '[A-Za-z0-9_\\-\\.]+(?=\\.[A-Za-z0-9]+$)'
+    let filename = resumeDataPath.match(regex)
+    if (!filename) {
+        console.error('There was a problem extracting the file name from file path ' + resumeDataPath)
+        process.exit(1)
+    }
+    return filename[0]
+}
+
 // Core logic
 
 let args = parseCliArguments(process.argv)
@@ -136,8 +152,10 @@ const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/temp
 
 let resumeHtml = compileHtml(compiledFunction, resumeData)
 
+let fileName = extractFileName(args.resumeDataPath)
+
 fs.writeFile(
-    path.join(__dirname, '../dist/resume.html'),
+    path.join(__dirname, `../dist/${fileName}.html`),
     resumeHtml,
-    generatePdf
+    generatePdfCallback(args.generatePdf, fileName)
 )
