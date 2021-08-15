@@ -39,7 +39,8 @@ interface ResumeData {
         details: string[]
     }
     projects: {
-        headline: string
+        companyType: string
+        tagline: string
         additionaDetails: string[]
     }[]
 }

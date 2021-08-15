@@ -49,7 +49,7 @@ html(lang='en')
         #main {
             grid-area: main;
             background: none;
-            padding: 10px;
+            padding: 0px 10px 10px 10px;
             font-size: 12px;
         }
         #padding {
@@ -65,6 +65,12 @@ html(lang='en')
             align-items: center;
             font-size: xx-small;
             font-style: italic;
+        }
+        #experience-details {
+            /*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
         }
         .fa-ul {
             margin-left: 20px
@@ -85,7 +91,7 @@ html(lang='en')
             color: #598547;
         }
         .sidebar-your-title {
-            font-size: 12px;
+            font-size: 14px;
         }
         .main-content {
             background: none;
@@ -94,10 +100,23 @@ html(lang='en')
         .section-title {
             font-size: 20px;
             color: #598547;
+            margin-bottom: 5px;
         }
         .sub-section-title {
             font-size: 12px;
             font-weight: 900;
+        }
+        .experience-time-frame {
+            float: left;
+            min-width: 78px;
+        }
+        .experience-company {
+            float: left;
+            min-width: 100px;
+        }
+        .experience-title {
+            float: left;
+            min-width: 120px;
         }
 
   #root
@@ -132,13 +151,12 @@ html(lang='en')
               span.fa-li
                 i(class='fas fa-chevron-right fa-xs')
               span #{skill.details}
-          br
 
       if education
         #education.sidebar-content
           span.section-title Education
+          br
           each degree in education
-            br
             span.sub-section-title #{degree.school}
             br
             span #{degree.years}
@@ -153,35 +171,35 @@ html(lang='en')
                   span #{detail}
 
       if certifications
-      #certifications.sidebar-content
-        span.section-title Certifications
-        each certification in certifications
+        #certifications.sidebar-content
+          span.section-title Certifications
           br
-          span.sub-section-title #{certification.company}
-          br
-          span
-            a(href=certification.link) #{certification.id}
-          br
-          ul.fa-ul
-            each individualCert in certification.list
-              li
-                span.fa-li
-                  i(class='fas fa-chevron-right fa-xs')
-                span #{individualCert}
+          each certification in certifications
+            span.sub-section-title #{certification.company}
+            br
+            span
+              a(href=certification.link) #{certification.id}
+            br
+            ul.fa-ul
+              each individualCert in certification.list
+                li
+                  span.fa-li
+                    i(class='fas fa-chevron-right fa-xs')
+                  span #{individualCert}
 
       if hobbies
-      #hobbies.sidebar-content
-        span.section-title Hobbies
-        each hobby in hobbies
+        #hobbies.sidebar-content
+          span.section-title Hobbies
           br
-          span #{hobby.headline}
-          br
-          ul.fa-ul
-            each detail in hobby.additionalDetails
-              li
-                span.fa-li
-                  i(class='fas fa-chevron-right fa-xs')
-                span #{detail}
+          each hobby in hobbies
+            span.sub-section-title #{hobby.headline}
+            br
+            ul.fa-ul
+              each detail in hobby.additionalDetails
+                li
+                  span.fa-li
+                    i(class='fas fa-chevron-right fa-xs')
+                  span #{detail}
 
       // Takes sidebar down to the bottom of the page
       #padding.sidebar-content
@@ -190,18 +208,20 @@ html(lang='en')
     #main
       if profile
         #profile.main-content
-          span.section-title Profile
+          span.section-title Professional Profile
           br
           span #{profile}
 
       if experience
         #experience.main-content
-          span.section-title Experience
+          span.section-title Relevant Employment
           br
           each job in experience
-            span #{job.timeFrame}&nbsp;&nbsp;&nbsp;&nbsp;
-            span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
-            span #{job.title}
+            #experience-details
+              span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
+              span #{job.title}&nbsp;&nbsp;&nbsp;&nbsp;
+              span #{job.timeFrame}
+
             if job.details
               ul.fa-ul
                 each detail in job.details
@@ -209,26 +229,25 @@ html(lang='en')
                     span.fa-li
                       i(class='fas fa-chevron-right fa-xs')
                     span #{detail}
-            else
-              // For some reason this _removes_ a br after the ul
               br
-            br
 
       if projects
         #projects.main-content
-          span.section-title Projects
+          span.section-title Interesting Projects
           br
           each project in projects
-            span #{project.headline}
+            span(style="font-weight: 900") #{project.companyType}
+            span  - #{project.tagline}
             br
             ul.fa-ul
-              each detail in project.additionalDetails
-                li
-                  span.fa-li
-                    i(class='fas fa-chevron-right fa-xs')
-                  span #{detail}
+              if project.additionalDetails
+                each detail in project.additionalDetails
+                  li
+                    span.fa-li
+                      i(class='fas fa-chevron-right fa-xs')
+                    span #{detail}
             br
 
     #footer
-      span Generating using my resume generator:&nbsp;
+      span Generating using:&nbsp;
       a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
