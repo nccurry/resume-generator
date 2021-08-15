@@ -23,5 +23,5 @@ Html and pdf files are output to the [dist](dist) directory.
 
 ```shell
 # npx ts-node src/index.ts </path/to/data.yaml> <generate pdf true / false>
-npx ts-node src/index.ts testResume.yaml true
+npx ts-node src/index.ts myResume.yaml true
 ```
