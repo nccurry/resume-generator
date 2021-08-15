@@ -103,19 +103,23 @@ experience:
   - Was part of a group of 17 people who avoided getting made redundant in 2014
 
 projects:
-- headline: Migration to marginally better vendor
+- companyType: Retailer
+  tagline: Migration to marginally better vendor
   additionalDetails:
   - Replaced old vendor technology with a new one that does the same thing
   - Worked late nights and weekends, but had Tuesdays off
-- headline: Downgraded accounting systems
+- companyType: Gas Station
+  tagline: Downgraded accounting systems
   additionalDetails:
   - Was able to keep myself on mute for all teleconference meetings
   - Reintroduce pen and paper as part of our standard offering
-- headline: Painted cafeteria mural
+- companyType: Elementary School
+  tagline: Painted cafeteria mural
   additionalDetails:
   - Paintined incredible mixed-media mural of a beagle with eagle wings
   - Was told by at least three people that they are pretty sure they like it better than the original landlord beige wall
-- headline: Held Pancake Social
+- companyType: Town Hall
+  tagline: Held Pancake Social
   additionalDetails:
   - Cooked brats and pancakes for the North American Public Sector division
   - Purchased a bounce house for everyone

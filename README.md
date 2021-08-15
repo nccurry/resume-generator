@@ -1,5 +1,7 @@
 # Resume Generator
 
+![](exampleResume.png?raw=true)
+
 ## Generate a resume
 
 ### Install packages
