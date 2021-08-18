@@ -88,6 +88,7 @@ let generatePdfCallback = function (generatePdf: boolean, fileName: string): Fun
     let pdfOptions: PDFOptions = {
         path: `${path.join(__dirname, `../dist/${fileName}.pdf`)}`,
         format: 'a4',
+        pageRanges: '1',
         margin: {
             top: "0px",
             left: "0px",
