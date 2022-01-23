@@ -5,17 +5,10 @@ html(lang='en')
     title #{name}'s Resume
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
     style.
-        html {
+        body {
             margin: 0;
             height: 100vh;
             width: 100vw;
-        }
-        body {
-            margin: 0;
-            /* Roughly A4 paper shaped on a PC*/
-            /* TODO: Fix this on mobile */
-            height: 1133px;
-            width: 800px;
             font-family: "Montserrat Medium", sans-serif;
             font-size: x-small;
         }
@@ -24,89 +17,97 @@ html(lang='en')
             color: black;
         }
         ul {
-            margin: 0 0 0 15px;
+            margin: 0 0 0 0.75%;
             padding: 0 0 0 0;
             list-style-type: none;
         }
         #root {
-            box-sizing: border-box;
-            display: grid;
-            grid-gap: 10px;
-            padding-left: 10px;
-            padding-right: 10px;
             height: 100%;
-            width: 100%;
-            grid-template-columns: 250px auto;
-            grid-template-rows: auto 30px;
+            /* A4 aspect */
+            aspect-ratio: 1 / 1.4142;
+            display: grid;
+            grid-gap: 0.75%;
+            grid-template-columns: 28% auto;
+            grid-template-rows: auto 2%;
             grid-template-areas:
-          "sidebar main"
-          "sidebar footer";
+              "sidebar main"
+              "sidebar footer";
         }
         #sidebar {
             grid-area: sidebar;
-            background: none;
             display: flex;
-            flex-flow: column;
+            flex-direction: column;
         }
         #main {
             grid-area: main;
-            background: none;
-            padding: 0px 10px 10px 10px;
-            font-size: 12px;
         }
-        #padding {
-            flex: auto;
-            margin-bottom: 0;
+        #cloud {
+            display: flex;
+            flex-wrap: wrap;
         }
         #footer {
             grid-area: footer;
-            background: none;
-            /* center text */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: xx-small;
-            font-style: italic;
         }
-        #experience-details {
-            /*https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
+        #padding {
+            margin-bottom: 0;
+            /* Grow to bottom of the screen */
+            flex-grow: 1;
+        }
+        .section-title {
+            font-size: 20px;
+            font-size: 1.5vh;
+            color: #598547;
+            margin-bottom: 0.75%;
+        }
+        .sub-section-title {
+            font-size: 12px;
+            font-size: .9vh;
+            font-weight: 900;
+        }
+        .sidebar-content {
+            background: #f5f6f5;
+            margin-bottom: 1.5%;
+            padding: 4%;
+            font-size: 12px;
+            font-size: .8vh;
+        }
+        .sidebar-your-name {
+            font-size: 26px;
+            font-size: 1.75vh;
+            color: #598547;
+        }
+        .sidebar-your-title {
+            font-size: 16px;
+            font-size: 1vh;
+        }
+        .main-content {
+            background: none;
+            margin: 0.75%;
+            word-wrap: break-word;
+            font-size: 12px;
+            font-size: 0.9vh;
         }
         .fa-ul {
-            margin-left: 20px
+            margin-left: 1.5vh
         }
         .fa-xs {
             /* Ensures the fa-xs icons are centered */
             position: relative;
             transform: translateY(-6%);
         }
-        .sidebar-content {
-            background: #f5f6f5;
-            margin-bottom: 5px;
-            padding: 10px;
+        .contact-text {
             font-size: 10px;
+            font-size: 0.85vh;
         }
-        .sidebar-your-name {
-            font-size: 26px;
-            color: #598547;
+        .footer-text {
+            font-size: 6px;
+            font-size: 0.6vh;
+            font-style: italic;
         }
-        .sidebar-your-title {
-            font-size: 14px;
-        }
-        .main-content {
-            background: none;
-            margin: 10px;
-        }
-        .section-title {
-            font-size: 20px;
-            color: #598547;
-            margin-bottom: 5px;
-        }
-        .sub-section-title {
-            font-size: 12px;
-            font-weight: 900;
+        /* https://github.com/puppeteer/puppeteer/issues/393#issuecomment-323536874 */
+        @page {
+          size: A4 landscape;
+          margin: 0;
         }
 
   #root
@@ -127,7 +128,7 @@ html(lang='en')
               li
                 span.fa-li
                   i(class=info.faIconClass)
-                a(href=info.link) #{info.value}
+                a.contact-text(href=info.link) #{info.value}
 
       if keySkills
       #skills.sidebar-content
@@ -191,7 +192,6 @@ html(lang='en')
                     i(class='fas fa-chevron-right fa-xs')
                   span #{detail}
 
-      // Takes sidebar down to the bottom of the page
       #padding.sidebar-content
 
 
@@ -241,6 +241,16 @@ html(lang='en')
                     span #{detail}
             br
 
+      if technologies
+        #technologies.main-content
+          span.section-title Recent Technologies
+          br
+          #cloud
+            each technology in technologies
+                span #{technology}&nbsp;&nbsp;&nbsp;&nbsp;
+
+
     #footer
-      span Generating using:&nbsp;
-      a(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+      span.footer-text Generating using:&nbsp;
+      span
+        a.footer-text(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
