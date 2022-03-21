@@ -23,8 +23,7 @@ html(lang='en')
         }
         #root {
             height: 100%;
-            /* A4 aspect */
-            aspect-ratio: 1 / 1.4142;
+            aspect-ratio: 1 / 1.4142; /* A4 aspect */
             display: grid;
             grid-gap: 0.75%;
             grid-template-columns: 28% auto;
@@ -104,12 +103,6 @@ html(lang='en')
             font-size: 0.6vh;
             font-style: italic;
         }
-        /* https://github.com/puppeteer/puppeteer/issues/393#issuecomment-323536874 */
-        @page {
-          size: A4 landscape;
-          margin: 0;
-        }
-
   #root
     #sidebar
       #name.sidebar-content
