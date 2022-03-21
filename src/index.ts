@@ -1,12 +1,12 @@
 'use strict'
-import {PDFOptions} from "puppeteer";
+import {PDFOptions} from "puppeteer"
 const path = require("path")
 const puppeteer = require("puppeteer")
 const fs = require("fs")
 const yaml = require("js-yaml")
-const pug = require('pug');
+const pug = require('pug')
 
-// Types and helper functions
+// Types
 
 interface ResumeData {
     name: string
@@ -50,6 +50,8 @@ interface cliArgs {
     generatePdf: boolean
 }
 
+// Helper functions
+
 function parseCliArguments(argv: Array<string>): cliArgs {
     let cliArgs = {
         resumeDataPath: '',
@@ -79,46 +81,6 @@ function getResumeData(filePath: string): ResumeData {
         process.exit(1)
     }
     return resumeData
-}
-
-// Little currying action to return the callback function
-// Probably a code smell
-let generatePdfCallback = function (generatePdf: boolean, fileName: string): Function {
-    // https://github.com/puppeteer/puppeteer/blob/v10.2.0/docs/api.md#pagepdfoptions
-    let pdfOptions: PDFOptions = {
-        path: `${path.join(__dirname, `../dist/${fileName}.pdf`)}`,
-        format: 'a4',
-        pageRanges: '1',
-        margin: {
-            top: "0px",
-            left: "0px",
-            right: "0px",
-            bottom: "0px"
-        },
-        printBackground: true
-    }
-
-    if (generatePdf) {
-        return function () {
-            // Anonymous function to skirt around nested asyncrony
-            (async () => {
-                try {
-                    const browser = await puppeteer.launch();
-                    const page = await browser.newPage();
-                    await page.goto(
-                        `file:${path.join(__dirname, `../dist/${fileName}.html`)}`,
-                        {waitUntil: 'networkidle0'}
-                    );
-                    await page.pdf(pdfOptions);
-                    await browser.close();
-                } catch (e) {
-                    console.log(e)
-                    process.exit(1)
-                }
-            })()
-        }
-    }
-    return () => {}
 }
 
 let compileHtml = function (compiledFunction: Function, resumeData: ResumeData): string {
@@ -157,7 +119,36 @@ let resumeHtml = compileHtml(compiledFunction, resumeData)
 let fileName = extractFileName(args.resumeDataPath)
 
 fs.writeFile(
-    path.join(__dirname, `../dist/${fileName}.html`),
-    resumeHtml,
-    generatePdfCallback(args.generatePdf, fileName)
+  path.join(__dirname, `../dist/${fileName}.html`),
+  resumeHtml,
+  // Callback to conditionally generate a PDF in addition to the HTML file
+  async () => {
+      if (!args.generatePdf) {
+          return
+      }
+
+      let pdfOptions: PDFOptions = {
+          path: `${path.join(__dirname, `../dist/${fileName}.pdf`)}`,
+          format: 'a4',
+          pageRanges: '1',
+          margin: {
+              top: "0px",
+              left: "0px",
+              right: "0px",
+              bottom: "0px"
+          },
+          printBackground: true
+      }
+
+      try {
+          const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+          const page = await browser.newPage()
+          await page.setContent(resumeHtml, { waitUntil: 'networkidle0' })
+          await page.pdf(pdfOptions)
+          await browser.close()
+      } catch (e) {
+          console.error(e)
+          process.exit(1)
+      }
+  }
 )
