@@ -118,8 +118,10 @@ let resumeHtml = compileHtml(compiledFunction, resumeData)
 
 let fileName = extractFileName(args.resumeDataPath)
 
+const timestamp = new Date().toJSON().slice(0,10)
+
 fs.writeFile(
-  path.join(__dirname, `../dist/${fileName}.html`),
+  path.join(__dirname, `../dist/${fileName}-${timestamp}.html`),
   resumeHtml,
   // Callback to conditionally generate a PDF in addition to the HTML file
   async () => {
@@ -127,8 +129,10 @@ fs.writeFile(
           return
       }
 
+
+
       let pdfOptions: PDFOptions = {
-          path: `${path.join(__dirname, `../dist/${fileName}.pdf`)}`,
+          path: `${path.join(__dirname, `../dist/${fileName}-${timestamp}.pdf`)}`,
           format: 'a4',
           pageRanges: '1',
           margin: {
