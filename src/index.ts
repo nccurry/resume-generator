@@ -118,7 +118,8 @@ let resumeHtml = compileHtml(compiledFunction, resumeData)
 
 let fileName = extractFileName(args.resumeDataPath)
 
-const timestamp = new Date().toJSON().slice(0,10)
+const cst_time = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
+const timestamp = new Date(cst_time).toJSON().slice(0,10)
 
 fs.writeFile(
   path.join(__dirname, `../dist/${fileName}-${timestamp}.html`),
