@@ -1,10 +1,11 @@
 'use strict'
-import {PDFOptions} from "puppeteer"
-const path = require("path")
-const puppeteer = require("puppeteer")
-const fs = require("fs")
-const yaml = require("js-yaml")
-const pug = require('pug')
+import { PDFOptions } from "puppeteer"
+import * as path from "path"
+import * as puppeteer from "puppeteer"
+import * as fs from "fs"
+import * as yaml from "js-yaml"
+import * as pug from "pug"
+import {LocalsObject} from "pug";
 
 // Types
 
@@ -45,15 +46,15 @@ interface ResumeData {
     }[]
 }
 
-interface cliArgs {
+interface CliArgs {
     resumeDataPath: string,
     generatePdf: boolean
 }
 
 // Helper functions
 
-function parseCliArguments(argv: Array<string>): cliArgs {
-    let cliArgs = {
+function parseCliArguments (argv: string[]): CliArgs {
+    const cliArgs = {
         resumeDataPath: '',
         generatePdf: true
     }
@@ -71,34 +72,33 @@ function parseCliArguments(argv: Array<string>): cliArgs {
     return cliArgs
 }
 
-function getResumeData(filePath: string): ResumeData {
-    let resumeData: ResumeData
+function getResumeData (filePath: string): ResumeData {
     try {
-        resumeData = yaml.load(fs.readFileSync(filePath, 'utf8'))
+        const resumeData = yaml.load(fs.readFileSync(filePath, 'utf8'))
+        return resumeData as ResumeData
+
     } catch (e) {
         console.error('There was a problem reading resume data from file ' + filePath)
         console.error(e)
         process.exit(1)
     }
-    return resumeData
 }
 
-let compileHtml = function (compiledFunction: Function, resumeData: ResumeData): string {
-    let resumeHtml: string
+function compileHtml (compiledFunction: (locals?: LocalsObject) => string, resumeData: ResumeData): string {
     try {
-        resumeHtml = compiledFunction(resumeData)
+        return compiledFunction(resumeData)
     } catch (e) {
         console.error('There was a problem compiling the resume pug template templates/template.pug')
         console.error(e)
         process.exit(1)
     }
 
-    return resumeHtml
+
 }
 
-let extractFileName = function(resumeDataPath: string): string {
-    let regex = '[A-Za-z0-9_\\-\\.]+(?=\\.[A-Za-z0-9]+$)'
-    let filename = resumeDataPath.match(regex)
+function extractFileName (resumeDataPath: string): string {
+    const regex = '[A-Za-z0-9_\\-\\.]+(?=\\.[A-Za-z0-9]+$)'
+    const filename = resumeDataPath.match(regex)
     if (!filename) {
         console.error('There was a problem extracting the file name from file path ' + resumeDataPath)
         process.exit(1)
@@ -108,18 +108,18 @@ let extractFileName = function(resumeDataPath: string): string {
 
 // Core logic
 
-let args = parseCliArguments(process.argv)
+const args = parseCliArguments(process.argv)
 
-let resumeData = getResumeData(args.resumeDataPath)
+const resumeData = getResumeData(args.resumeDataPath)
 
 const compiledFunction = pug.compileFile(path.join(__dirname, '../templates/template.pug'))
 
-let resumeHtml = compileHtml(compiledFunction, resumeData)
+const resumeHtml = compileHtml(compiledFunction, resumeData)
 
-let fileName = extractFileName(args.resumeDataPath)
+const fileName = extractFileName(args.resumeDataPath)
 
-const cst_time = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
-const timestamp = new Date(cst_time).toJSON().slice(0,10)
+const cstTime = new Date().toLocaleString("en-US", { timeZone: "America/Chicago" });
+const timestamp = new Date(cstTime).toJSON().slice(0,10)
 
 fs.writeFile(
   path.join(__dirname, `../dist/${fileName}-${timestamp}.html`),
@@ -130,9 +130,7 @@ fs.writeFile(
           return
       }
 
-
-
-      let pdfOptions: PDFOptions = {
+      const pdfOptions: PDFOptions = {
           path: `${path.join(__dirname, `../dist/${fileName}-${timestamp}.pdf`)}`,
           format: 'a4',
           pageRanges: '1',
@@ -151,6 +149,7 @@ fs.writeFile(
           await page.setContent(resumeHtml, { waitUntil: 'networkidle0' })
           await page.pdf(pdfOptions)
           await browser.close()
+
       } catch (e) {
           console.error(e)
           process.exit(1)
