@@ -142,3 +142,6 @@ projects:
   - Cooked brats and pancakes for the North American Public Sector division
   - Purchased a bounce house for everyone
   - Arranged syncronized 'Lord of the Dance' style competition
+
+# Show the "Generated using..." footer
+showGeneratedByFooter: true

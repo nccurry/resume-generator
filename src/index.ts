@@ -44,6 +44,7 @@ interface ResumeData {
         tagline: string
         additionaDetails: string[]
     }[]
+    showGeneratedByFooter: boolean
 }
 
 interface CliArgs {

@@ -231,7 +231,8 @@ html(lang='en')
                     span #{detail}
             br
 
-    #footer
-      span.footer-text Generating using:&nbsp;
-      span
-        a.footer-text(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+    if showGeneratedByFooter
+      #footer
+        span.footer-text Generating using:&nbsp;
+        span
+          a.footer-text(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
