@@ -37,7 +37,7 @@ keySkills:
 - title: Finger Painting
   details: Whether its an eagle or a beagle, I can evoke a real sense of "Hmm... I'm not sure about that".
 - title: Bike Shedding
-  details: I take driving the conversation sideways seriously and have won multiple industry recognizing my achievments.
+  details: I take driving the conversation sideways seriously and have won multiple industry awards recognizing my achievments.
 - title: Yak Shaving
   details: I am able to stay focused and dedicated, no matter how tedious or pointless the task.
 
@@ -89,7 +89,10 @@ hobbies:
 #
 
 # A blurb summarizing why you're awesome
-profile: Experienced professional with over 15 years of experience in multiple relevant industries. I love painting ocean imagery, crafting wooden furniture, and bungee jumping. I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
+profile: | 
+  Experienced professional with over 15 years of experience in multiple relevant industries. 
+  I love painting ocean imagery, crafting wooden furniture, and bungee jumping. 
+  I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
 
 # What have you done and where
 experience:
