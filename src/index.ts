@@ -92,8 +92,6 @@ function compileHtml (compiledFunction: (locals?: LocalsObject) => string, resum
         console.error(e)
         process.exit(1)
     }
-
-
 }
 
 function extractFileName (resumeDataPath: string): string {
