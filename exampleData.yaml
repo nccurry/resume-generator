@@ -1,7 +1,11 @@
 # Leaving any variable blank will remove it's
 # corresponding section from the generated resume.
 
-# Sidebar
+# The data type for this file is described in src/index.ts
+
+#
+# Sidebar section
+#
 
 # Your name shown in the top right
 name: Jane Smith
@@ -9,6 +13,8 @@ name: Jane Smith
 # Title shown in banner underneath your name
 bannerTitle: Mrs. Manager
 
+# Information on how to contact you
+# You can use any FontAwesome icons in this section
 contactInfo:
 - value: City, ST
   faIconClass: "fas fa-map-marker-alt"
@@ -26,6 +32,7 @@ contactInfo:
   faIconClass: "fab fa-linkedin-in"
   link: https://linkedin.com/in/janesmith
 
+# High level skills you have
 keySkills:
 - title: Finger Painting
   details: Whether its an eagle or a beagle, I can evoke a real sense of "Hmm... I'm not sure about that".
@@ -34,6 +41,7 @@ keySkills:
 - title: Yak Shaving
   details: I am able to stay focused and dedicated, no matter how tedious or pointless the task.
 
+# Your education information
 education:
 - school: University of State
   years: '2006 - 2011'
@@ -49,6 +57,7 @@ education:
   - '3.87 GPA'
   - 'Lead hot-dog eaters meetup group'
 
+# What certifications you have
 certifications:
 - company: Large Corporation
   id: 'License: 111-222-333'
@@ -62,6 +71,7 @@ certifications:
   list:
   - Certified Web Developer
 
+# What do you do outside of work
 hobbies:
 - headline: Bloons TD 6
   additionalDetails:
@@ -74,10 +84,14 @@ hobbies:
   additionalDetails:
   - They're as rutheless as they are cute
 
-# Main
+#
+# Main section
+#
 
+# A blurb summarizing why you're awesome
 profile: Experienced professional with over 15 years of experience in multiple relevant industries. I love painting ocean imagery, crafting wooden furniture, and bungee jumping. I have an uncanny ability to tell when people are lying and can peel a clementine with one hand behind my back.
 
+# What have you done and where
 experience:
 - company: Recognizable Corporation
   title: Mrs. Manager
@@ -102,6 +116,7 @@ experience:
   - Told a pretty funny joke to the CTO at the 2015 holiday party
   - Was part of a group of 17 people who avoided getting made redundant in 2014
 
+# Any interesting projects you want to highlight
 projects:
 - companyType: Retailer
   tagline: Migration to marginally better vendor
