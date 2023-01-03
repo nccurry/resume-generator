@@ -15,6 +15,11 @@ Install NodeJS on your system and install the required npm packages.
 sudo dnf module enable nodejs:16
 sudo dnf install module nodejs:16/default
 npm install
+
+# Ubuntu
+curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+npm install
 ```
 
 ### Fill out resume data
