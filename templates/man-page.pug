@@ -3,7 +3,7 @@ html(lang='en')
   head
     meta(charset='utf-8')
     title #{name}'s Resume
-    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
     style.
         body {
             margin: 0;
@@ -101,90 +101,6 @@ html(lang='en')
             font-style: italic;
         }
   #root
-    #sidebar
-      #name.sidebar-content
-        span.sidebar-your-name #{name}
-        br
-        if bannerTitle
-          span.sidebar-your-title #{bannerTitle}
-          br
-
-      if contactInfo
-        #contact.sidebar-content
-          span.section-title Contact Info
-          br
-          ul.fa-ul
-            each info in contactInfo
-              li
-                span.fa-li
-                  i(class=info.faIconClass)
-                a.contact-text(href=info.link) #{info.value}
-
-      if keySkills
-      #skills.sidebar-content
-        span.section-title Key Skills
-        br
-        each skill in keySkills
-          span.sub-section-title #{skill.title}
-          br
-          ul.fa-ul
-            li
-              span.fa-li
-                i(class='fas fa-chevron-right fa-xs')
-              span #{skill.details}
-
-      if education
-        #education.sidebar-content
-          span.section-title Education
-          br
-          each degree in education
-            span.sub-section-title #{degree.school}
-            br
-            span #{degree.years}
-            br
-            span(style='font-style: italic') #{degree.degree}
-            br
-            each detail in degree.additionalDetails
-              ul.fa-ul
-                li
-                  span.fa-li
-                    i(class='fas fa-chevron-right fa-xs')
-                  span #{detail}
-
-      if certifications
-        #certifications.sidebar-content
-          span.section-title Certifications
-          br
-          each certification in certifications
-            span.sub-section-title #{certification.company}
-            br
-            span
-              a(href=certification.link) #{certification.id}
-            br
-            ul.fa-ul
-              each individualCert in certification.list
-                li
-                  span.fa-li
-                    i(class='fas fa-chevron-right fa-xs')
-                  span #{individualCert}
-
-      if hobbies
-        #hobbies.sidebar-content
-          span.section-title Hobbies
-          br
-          each hobby in hobbies
-            span.sub-section-title #{hobby.headline}
-            br
-            ul.fa-ul
-              each detail in hobby.additionalDetails
-                li
-                  span.fa-li
-                    i(class='fas fa-chevron-right fa-xs')
-                  span #{detail}
-
-      #padding.sidebar-content
-
-
     #main
       if profile
         #profile.main-content
