@@ -56,7 +56,6 @@ function main (argv: Arguments) {
             if (!argv.pdf) {
                 return
             }
-
             const pdfOptions: PDFOptions = {
                 path: `${path.join(__dirname, `../dist/${fileName}-${timestamp}.pdf`)}`,
                 format: 'a4',
@@ -78,7 +77,7 @@ function main (argv: Arguments) {
                 await browser.close()
 
             } catch (e) {
-                console.error(e)
+                console.error(e.toLocaleString())
                 process.exit(1)
             }
         }
