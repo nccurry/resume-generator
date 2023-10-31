@@ -6,156 +6,165 @@ html(lang='en')
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
     style.
         body {
-            margin: 0;
-            height: 100vh;
-            width: 100vw;
-            font-family: "Montserrat Medium", sans-serif;
-            font-size: x-small;
+          margin: 0;
+          height: 100vh;
+          width: 100vw;
+          font-family: "Montserrat Medium", sans-serif;
+          font-size: x-small;
+          /*font-size: 15px;*/
+          /*font-size: 0.95vh;*/
         }
         a {
-            text-decoration: none;
-            color: black;
+          text-decoration: none;
+          color: black;
+          font-family: "Montserrat Medium", sans-serif;
+          font-size: x-small;
         }
         ul {
-            margin: 0 0 0 0.75%;
-            padding: 0 0 0 0;
-            list-style-type: none;
+          margin: 0 0 0 0.75%;
+          padding: 0 0 0 0;
+          list-style-type: none;
         }
         #root {
-            height: 100%;
-            aspect-ratio: 1 / 1.4142; /* A4 aspect */
-            display: grid;
-            grid-gap: 0.75%;
-            grid-template-columns: 28% auto;
-            grid-template-rows: auto 2%;
-            grid-template-areas:
-              "header"
-              "main"
-              "footer";
+          height: 100%;
+          aspect-ratio: 1 / 1.4142; /* A4 aspect */
+          margin: 1%;
+          align-content: start;
+          display: grid;
+          grid-gap: 1%;
+          grid-template-rows:
+            10px
+            auto;
+          grid-template-areas:
+            "header"
+            "name"
+            "synopsis"
+            "description"
+            "options"
+            "history"
+            "footer";
         }
         #header {
-            grid-area: header;
-            margin: 0 0 0 0;
+          grid-area: header;
+          margin: 0 0 0 0;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-between;
         }
         #name {
-            grid-area: name;
-            margin: 0 0 0 0;
+          grid-area: name;
+          margin: 0 0 0 0;
         }
         #synopsis {
-            grid-area: synopsis;
-            margin: 0 0 0 0;
+          grid-area: synopsis;
+          margin: 0 0 0 0;
         }
         #options {
-            grid-area: options;
-            margin: 0 0 0 0;
+          grid-area: options;
+          margin: 0 0 0 0;
+        }
+        #history {
+          grid-area: history;
+          margin: 0 0 0 0;
         }
         #footer {
-            grid-area: footer;
+          grid-area: footer;
         }
         #padding {
-            margin-bottom: 0;
-            /* Grow to bottom of the screen */
-            flex-grow: 1;
+          margin-bottom: 0;
+          /* Grow to bottom of the screen */
+          flex-grow: 1;
         }
         .section-title {
-            font-size: 20px;
-            font-size: 1.5vh;
-            color: #598547;
-            margin-bottom: 0.75%;
+          margin-bottom: 1.5%;
         }
-        .sub-section-title {
-            font-size: 12px;
-            font-size: .9vh;
-            font-weight: 900;
+        .section-content {
+          margin-left: 4%;
+          margin-bottom: 0.75%;
         }
-        .sidebar-content {
-            background: #f5f6f5;
-            margin-bottom: 1.5%;
-            padding: 4%;
-            font-size: 12px;
-            font-size: .8vh;
-        }
-        .sidebar-your-name {
-            font-size: 26px;
-            font-size: 1.75vh;
-            color: #598547;
-        }
-        .sidebar-your-title {
-            font-size: 16px;
-            font-size: 1vh;
+        .sub-section-content {
+          margin-left: 4%;
+          margin-bottom: 0.75%;
         }
         .main-content {
-            background: none;
-            margin: 0.85%;
-            word-wrap: break-word;
-            font-size: 12px;
-            font-size: 0.95vh;
+          background: none;
+          margin: 0.85%;
+          word-wrap: break-word;
+          font-size: 12px;
+          font-size: 0.95vh;
         }
         .fa-ul {
-            margin-left: 1.5vh
+          margin-left: 1.5vh
         }
         .fa-xs {
-            /* Ensures the fa-xs icons are centered */
-            position: relative;
-            transform: translateY(-6%);
-        }
-        .contact-text {
-            font-size: 10px;
-            font-size: 0.85vh;
+          /* Ensures the fa-xs icons are centered */
+          position: relative;
+          transform: translateY(-6%);
         }
         .footer-text {
-            font-size: 6px;
-            font-size: 0.6vh;
-            font-style: italic;
+          font-size: 6px;
+          font-size: 0.6vh;
+          font-style: italic;
         }
   #root
-    #main
-      if profile
-        #profile.main-content
-          br
-          span.section-title Professional Profile
-          br
-          span #{profile}
-          br
-          br
+    #header
+      span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
+      span Linux User Manual - Resume
+      span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
+    #name
+      span.section-title NAME
+      <br>
+      div.section-content
+        span #{`${name.toLowerCase().replace(" ", "_")} - ${bannerTitle}`}
+    #synopsis
+      span.section-title SYNOPSIS
+      <br>
+      div.section-content
+        span #{name.toLowerCase().replace(" ", "_")} skills &#32;&#32;
+        each skill in keySkills
+          span [--#{skill.title.toLowerCase().replace(" ", "-")}] &#32;&#32;
+        <br>
+        span #{name.toLowerCase().replace(" ", "_")} certifications &#32;&#32;
+            each certification in certifications
+              each type in certification.list
+                span #{`[--${certification.company.toLowerCase().match(/\b(\w)/g).join('')}-${type.toLowerCase().match(/\b(\w)/g).join('')}] `}
+                //span #{`[--${certification.company.toLowerCase().replace(" ", "-")}-${type.toLowerCase().replace(" ", "-")}] `}
+    #description
+      span.section-title DESCRIPTION
+      <br>
+      div.section-content
+        span #{profile}
+    #options
+      span.section-title OPTIONS
+      <br>
+    #notes
+      span.section-title NOTES
+      <br>
+      div.section-content
+        each school in education
+          span #{`${school.degree} - ${school.school}`}
+          <br>
+          div.section-content
+            each detail in school.additionalDetails
+              span #{detail}
+              <br>
+          <br>
+    #history
+      span.section-title HISTORY
+      <br>
+      div.section-content
 
-      if experience
-        #experience.main-content
-          span.section-title Relevant Employment
-          br
-          each job in experience
-            #experience-details
-              span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
-              span #{job.title}&nbsp;&nbsp;&nbsp;&nbsp;
-              span #{job.timeFrame}
+    #seealso
+      span.section-title SEE ALSO
+      <br>
+      div.section-content
+          each info in contactInfo
+            span
+              a(href=info.link) #{`${info.value}, `}
+  //          TODO: Fix comma
 
-            if job.details
-              ul.fa-ul
-                each detail in job.details
-                  li
-                    span.fa-li
-                      i(class='fas fa-chevron-right fa-xs')
-                    span #{detail}
-              br
-
-      if projects
-        #projects.main-content
-          span.section-title Interesting Projects
-          br
-          each project in projects
-            span(style="font-weight: 900") #{project.companyType}
-            span  - #{project.tagline}
-            br
-            ul.fa-ul
-              if project.additionalDetails
-                each detail in project.additionalDetails
-                  li
-                    span.fa-li
-                      i(class='fas fa-chevron-right fa-xs')
-                    span #{detail}
-            br
-
-    if showGeneratedByFooter
+  if showGeneratedByFooter
       #footer
         span.footer-text Generating using:&nbsp;
         span
