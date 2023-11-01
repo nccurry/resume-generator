@@ -38,6 +38,5 @@ Generate the HTML and optional PDF file using Pug and Puppeteer.
 HTML and PDF files are output to the [dist](dist) directory.
 
 ```shell
-# npx ts-node src/index.ts </path/to/data.yaml> <generate pdf true / false>
-npx ts-node src/index.ts myResume.yaml true
+npx ts-node src/index.ts --file myResume.yaml --template "green-columns"
 ```
