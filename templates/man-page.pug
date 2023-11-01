@@ -38,11 +38,15 @@ html(lang='en')
         /* Grow to bottom of the screen */
         flex-grow: 1;
       }
+      .header-text {
+          font-weight: bold;
+      }
       .section-title {
         margin-bottom: 1.5%;
+        font-weight: bold;
       }
       .section-content {
-        margin: 0 4% 0 4%;
+        margin: 0 4% 0.5% 4%;
       }
       .footer-content {
           text-align: center;
@@ -54,19 +58,17 @@ html(lang='en')
       }
   #root
     #header
-      span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
+      span.header-text #{`${name.toUpperCase().replace(" ", "_")}(7)`}
       span Linux User Manual - Resume
-      span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
+      span.header-text #{`${name.toUpperCase().replace(" ", "_")}(7)`}
 
     #name
       span.section-title NAME
-      <br>
       div.section-content
         span #{`${name.toLowerCase().replace(" ", "_")} - ${bannerTitle}`}
 
     #synopsis
       span.section-title SYNOPSIS
-      <br>
       div.section-content
         span #{name.toLowerCase().replace(" ", "_")} skills &#32;&#32;
         each skill in keySkills
@@ -79,56 +81,50 @@ html(lang='en')
 
     #description
       span.section-title DESCRIPTION
-      <br>
       div.section-content
         span #{profile}
 
     #options
       span.section-title OPTIONS
-      <br>
       each skill, skillIndex in keySkills
         div.section-content
           span --#{skill.title.toLowerCase().replace(" ", "-")}
-          <br>
           div.section-content
             span #{skill.details}
             if skillIndex < keySkills.length - 1
               <br>
-              <br>
 
     #history
       span.section-title HISTORY
-      <br>
       div.section-content
         each job, jobIndex in experience
           span #{job.timeFrame} - #{job.company} - #{job.title}
-          <br>
           div.section-content
             each detail, detailIndex in job.details
               span - #{detail}
               if detailIndex < job.details.length - 1
                 <br>
-          if jobIndex < experience.length - 1
-            <br>
 
     #notes
       span.section-title NOTES
-      <br>
       div.section-content
           each school, schoolIndex in education
             span #{`${school.degree} - ${school.school}`}
-            <br>
             div.section-content
               each detail, detailIndex in school.additionalDetails
                 span - #{detail}
                 if detailIndex < school.additionalDetails.length - 1
                   <br>
-            if schoolIndex < education.length - 1
-              <br>
-
+          each company, companyIndex in certifications
+            span #{company.company}&nbsp;
+              a(href='#{company.link}') - #{company.id}
+            div.section-content
+                each certification, certificationIndex in company.list
+                  span - #{certification}
+                  if certificationIndex < company.list.length - 1
+                    <br>
     #example
       span.section-title EXAMPLE
-      <br>
       div.section-content
         each project, projectIndex in projects
           span #{project.companyType} - #{project.tagline}
@@ -138,13 +134,9 @@ html(lang='en')
               span - #{detail}
               if detailIndex < project.additionalDetails.length - 1
                 <br>
-            if projectIndex < projects.length - 1
-              <br>
-              <br>
 
     #seealso
         span.section-title SEE ALSO
-        <br>
         div.section-content
             each info, infoIndex in contactInfo
               span
