@@ -5,118 +5,65 @@ html(lang='en')
     title #{name}'s Resume
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css")
     style.
-        body {
-          margin: 0;
-          height: 100vh;
-          width: 100vw;
-          font-family: "Montserrat Medium", sans-serif;
-          font-size: x-small;
-          /*font-size: 15px;*/
-          /*font-size: 0.95vh;*/
-        }
-        a {
-          text-decoration: none;
-          color: black;
-          font-family: "Montserrat Medium", sans-serif;
-          font-size: x-small;
-        }
-        ul {
-          margin: 0 0 0 0.75%;
-          padding: 0 0 0 0;
-          list-style-type: none;
-        }
-        #root {
-          height: 100%;
-          aspect-ratio: 1 / 1.4142; /* A4 aspect */
-          margin: 1%;
-          align-content: start;
-          display: grid;
-          grid-gap: 1%;
-          grid-template-rows:
-            10px
-            auto;
-          grid-template-areas:
-            "header"
-            "name"
-            "synopsis"
-            "description"
-            "options"
-            "history"
-            "footer";
-        }
-        #header {
-          grid-area: header;
-          margin: 0 0 0 0;
-          display: flex;
-          flex-direction: row;
-          flex-wrap: nowrap;
-          justify-content: space-between;
-        }
-        #name {
-          grid-area: name;
-          margin: 0 0 0 0;
-        }
-        #synopsis {
-          grid-area: synopsis;
-          margin: 0 0 0 0;
-        }
-        #options {
-          grid-area: options;
-          margin: 0 0 0 0;
-        }
-        #history {
-          grid-area: history;
-          margin: 0 0 0 0;
-        }
-        #footer {
-          grid-area: footer;
-        }
-        #padding {
-          margin-bottom: 0;
-          /* Grow to bottom of the screen */
-          flex-grow: 1;
-        }
-        .section-title {
-          margin-bottom: 1.5%;
-        }
-        .section-content {
-          margin-left: 4%;
-          margin-bottom: 0.75%;
-        }
-        .sub-section-content {
-          margin-left: 4%;
-          margin-bottom: 0.75%;
-        }
-        .main-content {
-          background: none;
-          margin: 0.85%;
-          word-wrap: break-word;
-          font-size: 12px;
-          font-size: 0.95vh;
-        }
-        .fa-ul {
-          margin-left: 1.5vh
-        }
-        .fa-xs {
-          /* Ensures the fa-xs icons are centered */
-          position: relative;
-          transform: translateY(-6%);
-        }
-        .footer-text {
-          font-size: 6px;
-          font-size: 0.6vh;
-          font-style: italic;
-        }
+      body {
+        margin: 0;
+        height: 100vh;
+        width: 100vw;
+        font-family: "Montserrat Medium", sans-serif;
+        font-size: x-small;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      #root {
+        height: 100%;
+        aspect-ratio: 1 / 1.4142; /* A4 aspect */
+        margin: 1% 1% 1% 1%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5%;
+      }
+      #header {
+        grid-area: header;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        margin: 0 1% 0 0;
+      }
+      #padding {
+        grid-area: padding;
+        margin-bottom: 0;
+        /* Grow to bottom of the screen */
+        flex-grow: 1;
+      }
+      .section-title {
+        margin-bottom: 1.5%;
+      }
+      .section-content {
+        margin: 0 4% 0 4%;
+      }
+      .footer-content {
+          text-align: center;
+      }
+      .footer-text {
+        font-size: 6px;
+        font-size: 0.6vh;
+        font-style: italic;
+      }
   #root
     #header
       span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
       span Linux User Manual - Resume
       span #{`${name.toUpperCase().replace(" ", "_")}(7)`}
+
     #name
       span.section-title NAME
       <br>
       div.section-content
         span #{`${name.toLowerCase().replace(" ", "_")} - ${bannerTitle}`}
+
     #synopsis
       span.section-title SYNOPSIS
       <br>
@@ -129,43 +76,88 @@ html(lang='en')
             each certification in certifications
               each type in certification.list
                 span #{`[--${certification.company.toLowerCase().match(/\b(\w)/g).join('')}-${type.toLowerCase().match(/\b(\w)/g).join('')}] `}
-                //span #{`[--${certification.company.toLowerCase().replace(" ", "-")}-${type.toLowerCase().replace(" ", "-")}] `}
+
     #description
       span.section-title DESCRIPTION
       <br>
       div.section-content
         span #{profile}
+
     #options
       span.section-title OPTIONS
       <br>
-    #notes
-      span.section-title NOTES
-      <br>
-      div.section-content
-        each school in education
-          span #{`${school.degree} - ${school.school}`}
+      each skill, skillIndex in keySkills
+        div.section-content
+          span --#{skill.title.toLowerCase().replace(" ", "-")}
           <br>
           div.section-content
-            each detail in school.additionalDetails
-              span #{detail}
+            span #{skill.details}
+            if skillIndex < keySkills.length - 1
               <br>
-          <br>
+              <br>
+
     #history
       span.section-title HISTORY
       <br>
       div.section-content
+        each job, jobIndex in experience
+          span #{job.timeFrame} - #{job.company} - #{job.title}
+          <br>
+          div.section-content
+            each detail, detailIndex in job.details
+              span - #{detail}
+              if detailIndex < job.details.length - 1
+                <br>
+          if jobIndex < experience.length - 1
+            <br>
 
-    #seealso
-      span.section-title SEE ALSO
+    #notes
+      span.section-title NOTES
       <br>
       div.section-content
-          each info in contactInfo
-            span
-              a(href=info.link) #{`${info.value}, `}
-  //          TODO: Fix comma
+          each school, schoolIndex in education
+            span #{`${school.degree} - ${school.school}`}
+            <br>
+            div.section-content
+              each detail, detailIndex in school.additionalDetails
+                span - #{detail}
+                if detailIndex < school.additionalDetails.length - 1
+                  <br>
+            if schoolIndex < education.length - 1
+              <br>
 
-  if showGeneratedByFooter
-      #footer
-        span.footer-text Generating using:&nbsp;
-        span
-          a.footer-text(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+    #example
+      span.section-title EXAMPLE
+      <br>
+      div.section-content
+        each project, projectIndex in projects
+          span #{project.companyType} - #{project.tagline}
+          <br>
+          div.section-content
+            each detail, detailIndex in project.additionalDetails
+              span - #{detail}
+              if detailIndex < project.additionalDetails.length - 1
+                <br>
+            if projectIndex < projects.length - 1
+              <br>
+              <br>
+
+    #seealso
+        span.section-title SEE ALSO
+        <br>
+        div.section-content
+            each info, infoIndex in contactInfo
+              span
+              if infoIndex < contactInfo.length - 1
+                a(href=info.link) #{`${info.value}, `}
+              else
+                a(href=info.link) #{`${info.value}`}
+
+    #padding
+
+    if showGeneratedByFooter
+        #footer
+          div.footer-content
+            span.footer-text Generating using:&nbsp;
+              a.footer-text(href='https://github.com/nccurry/resume-generator') github.com/nccurry/resume-generator
+
