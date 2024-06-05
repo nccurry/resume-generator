@@ -11,14 +11,18 @@ Generate a decent looking resume with NodeJS, Puppeteer, and Pug.
 Install NodeJS on your system and install the required npm packages.
 
 ```shell
-# Fedora
-sudo dnf module enable nodejs:16
-sudo dnf install module nodejs:16/default
+# Fedora 40
+sudo dnf module enable nodejs:20
+sudo dnf install module nodejs:20/common
 npm install
 
-# Ubuntu
-curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
+# Ubuntu 22.04
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
+npm install
+
+# Windows 11
+winget install OpenJS.NodeJS
 npm install
 ```
 
