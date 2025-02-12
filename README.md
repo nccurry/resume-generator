@@ -12,14 +12,16 @@ Install NodeJS on your system and install the required npm packages.
 
 ```shell
 # Fedora 40
-sudo dnf module enable nodejs:20
-sudo dnf install module nodejs:20/common
+sudo dnf module enable nodejs:22
+sudo dnf install module nodejs:22/common
 npm install
 
 # Ubuntu 22.04
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
-npm install
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+nvm install 22
+node -v
+nvm current
+npm -v
 
 # Windows 11
 winget install OpenJS.NodeJS
@@ -42,5 +44,6 @@ Generate the HTML and optional PDF file using Pug and Puppeteer.
 HTML and PDF files are output to the [dist](dist) directory.
 
 ```shell
+npm install
 npx ts-node src/index.ts --file myResume.yaml --template "green-columns"
 ```

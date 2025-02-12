@@ -82,7 +82,9 @@ html(lang='en')
     #description
       span.section-title DESCRIPTION
       div.section-content
-        span #{profile}
+        each detail in profile
+          span #{detail}
+          br
 
     #options
       span.section-title OPTIONS
