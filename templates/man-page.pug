@@ -30,7 +30,7 @@ html(lang='en')
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
-        margin: 0 1% 0 0;
+        margin: 0 4% 0 1%;
       }
       #padding {
         grid-area: padding;
@@ -42,11 +42,15 @@ html(lang='en')
           font-weight: bold;
       }
       .section-title {
-        margin-bottom: 1.5%;
+        margin: 0 2% 1.5% 6%;
         font-weight: bold;
       }
       .section-content {
-        margin: 0 4% 0.5% 4%;
+        margin: 0.25% 20% 0.25% 8%;
+      }
+
+      .section-sub-content {
+        margin: 0.5% 2% 0.5% 6%;
       }
       .footer-content {
           text-align: center;
@@ -91,7 +95,7 @@ html(lang='en')
       each skill, skillIndex in keySkills
         div.section-content
           span --#{skill.title.toLowerCase().replace(" ", "-")}
-          div.section-content
+          div.section-sub-content
             span #{skill.details}
             if skillIndex < keySkills.length - 1
               <br>
@@ -100,8 +104,12 @@ html(lang='en')
       span.section-title HISTORY
       div.section-content
         each job, jobIndex in experience
-          span #{job.timeFrame} - #{job.company} - #{job.title}
-          div.section-content
+          span
+            strong #{job.title} -&nbsp;
+            | #{job.company} -&nbsp;
+            strong #{job.timeFrame}
+
+          div.section-sub-content
             each detail, detailIndex in job.details
               span - #{detail}
               if detailIndex < job.details.length - 1
@@ -111,27 +119,32 @@ html(lang='en')
       span.section-title NOTES
       div.section-content
           each school, schoolIndex in education
-            span #{`${school.degree} - ${school.school}`}
-            div.section-content
+            span
+              strong #{school.degree} -&nbsp;
+              | #{school.school}
+            div.section-sub-content
               each detail, detailIndex in school.additionalDetails
                 span - #{detail}
                 if detailIndex < school.additionalDetails.length - 1
                   <br>
           each company, companyIndex in certifications
-            span #{company.company}&nbsp;
+            span
+              strong #{company.company}&nbsp;
               a(href='#{company.link}') - #{company.id}
-            div.section-content
-                each certification, certificationIndex in company.list
-                  span - #{certification}
-                  if certificationIndex < company.list.length - 1
-                    <br>
+              div.section-sub-content
+            //    each certification, certificationIndex in company.list
+            //      span - #{certification}
+            //      if certificationIndex < company.list.length - 1
+            //        <br>
     #example
       span.section-title EXAMPLE
       div.section-content
         each project, projectIndex in projects
-          span #{project.companyType} - #{project.tagline}
+          span
+            | #{project.companyType} -&nbsp;
+            strong #{project.tagline}
           <br>
-          div.section-content
+          div.section-sub-content
             each detail, detailIndex in project.additionalDetails
               span - #{detail}
               if detailIndex < project.additionalDetails.length - 1
