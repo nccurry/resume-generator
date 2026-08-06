@@ -109,11 +109,12 @@ html(lang='en')
             | #{job.company} -&nbsp;
             strong #{job.timeFrame}
 
-          div.section-sub-content
-            each detail, detailIndex in job.details
-              span - #{detail}
-              if detailIndex < job.details.length - 1
-                <br>
+          if job.details
+            div.section-sub-content
+              each detail, detailIndex in job.details
+                span - #{detail}
+                if detailIndex < job.details.length - 1
+                  <br>
 
     #notes
       span.section-title NOTES

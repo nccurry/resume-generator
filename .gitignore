@@ -1,5 +1,7 @@
-node_modules
+.tools/
+.cache/
+node_modules/
+dist/
 templates/template.html
 src/index.js
-.idea
-dist/*
+.idea/

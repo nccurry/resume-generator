@@ -1,0 +1,91 @@
+version: "3"
+
+vars:
+  MISE: '{{if .MISE_BIN}}{{.MISE_BIN}}{{else}}mise{{end}}'
+  TASK: '{{if .TASK_BIN}}{{.TASK_BIN}}{{else}}task{{end}}'
+  NODE: '{{if .NODE_BIN}}{{.NODE_BIN}}{{else}}node{{end}}'
+  NPM: '{{if .NPM_BIN}}{{.NPM_BIN}}{{else}}{{if eq OS "windows"}}npm.cmd{{else}}npm{{end}}{{end}}'
+
+tasks:
+  default:
+    desc: List available repository tasks
+    cmds:
+      - '"{{.TASK}}" --list'
+
+  setup:
+    desc: Install repository dependencies and verify the development environment
+    cmds:
+      - task: deps:install
+      - task: versions
+      - '"{{.NPM}}" exec -- puppeteer browsers list'
+      - 'echo "Setup complete. Run the bootstrap script with ''check'' to validate the repository."'
+
+  versions:
+    desc: Show pinned development tool versions
+    cmds:
+      - '"{{.MISE}}" --version'
+      - '"{{.TASK}}" --version'
+      - '"{{.NODE}}" --version'
+      - '"{{.NPM}}" --version'
+
+  deps:install:
+    desc: Install the exact dependency lockfile
+    cmds:
+      - '"{{.NPM}}" install'
+
+  deps:outdated:
+    desc: Report outdated direct dependencies
+    cmds:
+      - '"{{.NPM}}" outdated --depth=0'
+
+  deps:update:
+    desc: Update all direct dependencies to their latest stable releases
+    cmds:
+      - '"{{.NPM}}" install --save-exact js-yaml@latest pug@latest puppeteer@latest yargs@latest'
+      - '"{{.NPM}}" install --save-dev --save-exact @biomejs/biome@latest @types/node@latest @types/pug@latest @types/yargs@latest typescript@latest'
+      - '"{{.NPM}}" install-scripts prune'
+      - task: check
+
+  build:
+    desc: Compile TypeScript to dist
+    cmds:
+      - '"{{.NPM}}" run build'
+
+  typecheck:
+    desc: Type-check without emitting files
+    cmds:
+      - '"{{.NPM}}" run typecheck'
+
+  lint:
+    desc: Check source formatting and lint rules with Biome
+    cmds:
+      - '"{{.NPM}}" run lint'
+
+  format:
+    desc: Format source and configuration files with Biome
+    cmds:
+      - '"{{.NPM}}" run format'
+
+  generate:
+    desc: "Generate a resume (usage: task generate -- --file resume.yaml)"
+    cmds:
+      - task: build
+      - '"{{.NODE}}" dist/index.js {{.CLI_ARGS}}'
+
+  smoke:
+    desc: Compile and render both templates without launching Chrome
+    cmds:
+      - task: build
+      - '"{{.NPM}}" run smoke'
+
+  check:
+    desc: Run all repository validation
+    cmds:
+      - task: lint
+      - task: typecheck
+      - task: smoke
+
+  clean:
+    desc: Remove generated output
+    cmds:
+      - '"{{.NPM}}" run clean'

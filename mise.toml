@@ -1,0 +1,5 @@
+min_version = "2026.8.2"
+
+[tools]
+node = "26.7.0"
+task = "3.52.0"
