@@ -86,8 +86,12 @@ html(lang='en')
     #description
       span.section-title DESCRIPTION
       div.section-content
-        each detail in profile
-          span #{detail}
+        if Array.isArray(profile)
+          each detail in profile
+            span #{detail}
+            br
+        else
+          span #{profile}
           br
 
     #options
@@ -103,18 +107,27 @@ html(lang='en')
     #history
       span.section-title HISTORY
       div.section-content
-        each job, jobIndex in experience
+        each employer in experience
           span
-            strong #{job.title} -&nbsp;
-            | #{job.company} -&nbsp;
-            strong #{job.timeFrame}
+            strong #{employer.company}
+            if employer.timeFrame
+              |  -&nbsp;#{employer.timeFrame}
 
-          if job.details
+          each role in employer.roles
             div.section-sub-content
-              each detail, detailIndex in job.details
-                span - #{detail}
-                if detailIndex < job.details.length - 1
-                  <br>
+              span
+                strong #{role.title}
+                if role.focusArea
+                  |  - #{role.focusArea}
+                if !employer.timeFrame && role.timeFrame
+                  |  -&nbsp;#{role.timeFrame}
+
+              if role.details && role.details.length
+                div.section-sub-content
+                  each detail, detailIndex in role.details
+                    span - #{detail}
+                    if detailIndex < role.details.length - 1
+                      <br>
 
     #notes
       span.section-title NOTES
@@ -142,8 +155,9 @@ html(lang='en')
       div.section-content
         each project, projectIndex in projects
           span
-            | #{project.companyType} -&nbsp;
             strong #{project.tagline}
+            if project.companyType
+              |  -&nbsp;#{project.companyType}
           <br>
           div.section-sub-content
             each detail, detailIndex in project.additionalDetails

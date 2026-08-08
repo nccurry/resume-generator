@@ -31,8 +31,30 @@ export interface CliArgs {
   templateName: TemplateType
 }
 
-export const templateTypes = ["green-columns", "man-page"] as const
+export const templateTypes = ["green-columns", "man-page", "simple"] as const
 export type TemplateType = (typeof templateTypes)[number]
+
+export interface ExperienceRole {
+  title: string
+  focusArea?: string
+  timeFrame?: string
+  details: string[]
+}
+
+export interface ExperienceCompany {
+  company: string
+  timeFrame?: string
+  roles: ExperienceRole[]
+}
+
+export interface TechnologySection {
+  headline: string
+  groups?: {
+    title: string
+    items: string[]
+  }[]
+  additionalDetails?: string[]
+}
 
 /**
  * Checks whether a string names one of the supported Pug templates.
@@ -46,6 +68,7 @@ export function isTemplateType(str: string): str is TemplateType {
 export interface ResumeData {
   name: string
   bannerTitle: string
+  profile: string | string[]
   contactInfo: {
     value: string
     faIconClass: string
@@ -67,16 +90,21 @@ export interface ResumeData {
     link: string
     list: string[]
   }[]
-  experience: {
-    company: string
-    title: string
-    timeFrame: string
-    details: string[] | null
-  }
+  experience: ExperienceCompany[]
   projects: {
     companyType: string
     tagline: string
+    link?: string
+    technologies?: string | string[]
+    timeFrame?: string
     additionalDetails: string[]
   }[]
+  hobbies: {
+    headline: string
+    additionalDetails: string[]
+  }[]
+  usedTechnologies?: TechnologySection
+  /** @deprecated Use `usedTechnologies` in new YAML files. */
+  technologies?: TechnologySection
   showGeneratedByFooter: boolean
 }

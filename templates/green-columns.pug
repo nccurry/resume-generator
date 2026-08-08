@@ -191,7 +191,13 @@ html(lang='en')
           br
           span.section-title Professional Profile
           br
-          span #{profile}
+          if Array.isArray(profile)
+            each detail, detailIndex in profile
+              span #{detail}
+              if detailIndex < profile.length - 1
+                br
+          else
+            span #{profile}
           br
           br
 
@@ -199,28 +205,38 @@ html(lang='en')
         #experience.main-content
           span.section-title Relevant Employment
           br
-          each job in experience
-            #experience-details
-              span(style="font-weight: 900") #{job.company}&nbsp;&nbsp;&nbsp;&nbsp;
-              span #{job.title}&nbsp;&nbsp;&nbsp;&nbsp;
-              span #{job.timeFrame}
+          each employer in experience
+            .experience-details
+              span(style="font-weight: 900") #{employer.company}
+              if employer.timeFrame
+                span &nbsp;&nbsp;&nbsp;&nbsp;#{employer.timeFrame}
 
-            if job.details
-              ul.fa-ul
-                each detail in job.details
-                  li
-                    span.fa-li
-                      i(class='fas fa-chevron-right fa-xs')
-                    span #{detail}
-              br
+            each role in employer.roles
+              .experience-details
+                span
+                  | #{role.title}
+                  if role.focusArea
+                    |  - #{role.focusArea}
+                if !employer.timeFrame && role.timeFrame
+                  span &nbsp;&nbsp;&nbsp;&nbsp;#{role.timeFrame}
+
+              if role.details && role.details.length
+                ul.fa-ul
+                  each detail in role.details
+                    li
+                      span.fa-li
+                        i(class='fas fa-chevron-right fa-xs')
+                      span #{detail}
+                br
 
       if projects
         #projects.main-content
           span.section-title Interesting Projects
           br
           each project in projects
-            span(style="font-weight: 900") #{project.companyType}
-            span  - #{project.tagline}
+            span(style="font-weight: 900") #{project.tagline}
+            if project.companyType
+              span  - #{project.companyType}
             br
             ul.fa-ul
               if project.additionalDetails

@@ -54,8 +54,54 @@ command always runs with the repository's pinned tools:
 .\bootstrap.ps1 generate -- --file myResume.yaml --template green-columns
 ```
 
-Available templates are `green-columns` and `man-page`. Add `--no-pdf` to skip
-launching Chrome and generate only HTML.
+Available templates are `green-columns`, `man-page`, and `simple`. The `simple`
+template uses a single-column, text-first layout designed for clear reading and
+reliable resume parsing. Add `--no-pdf` to skip launching Chrome and generate
+only HTML.
+
+Group multiple roles at one employer under `roles`:
+
+```yaml
+experience:
+- company: Example Company
+  timeFrame: 2021 - Present
+  roles:
+  - title: Senior Engineer
+    focusArea: Platform Reliability
+    details:
+    - Led delivery for a platform used across several product teams.
+  - title: Engineer
+    details:
+    - Built and maintained reliable services for customer-facing products.
+```
+
+Each role uses a `details` list, whether it contains one short description or
+several. Use the optional `focusArea` field to distinguish a specialization from
+the formal job title. The original flat `company`, `title`, `timeFrame`, and
+`details` format remains supported for existing resume data. Omit the company
+`timeFrame` to show dates beside individual roles instead. Legacy `summary`
+values are preserved as the first item in `details`.
+
+Add an optional keyword-focused Technologies section to the end of the simple
+template:
+
+```yaml
+usedTechnologies:
+  headline: A word cloud of technologies I've used to appease the machine scanning this resume.
+  groups:
+  - title: Languages
+    items:
+    - TypeScript
+    - Go
+  - title: Platform
+    items:
+    - Kubernetes
+    - Docker
+```
+
+Grouped technologies render with a bold category label followed by normal-weight
+keywords. The original `additionalDetails` list remains supported for existing
+resume files.
 
 ## Common tasks
 
@@ -68,7 +114,7 @@ The main repository activities are:
 | Command | Purpose |
 | --- | --- |
 | `task setup` | Install exact locked dependencies and show tool versions |
-| `task check` | Run Biome, TypeScript, the production build, and template smoke tests |
+| `task check` | Run linting, type-checking, unit tests, the production build, and template smoke tests |
 | `task generate -- --file <yaml>` | Build and generate a resume |
 | `task format` | Format source and configuration files |
 | `task deps:outdated` | Report outdated direct npm dependencies |

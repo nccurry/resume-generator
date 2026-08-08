@@ -1,7 +1,7 @@
-# Leaving any variable blank will remove it's
+# Leaving any variable blank will remove its
 # corresponding section from the generated resume.
 
-# The data type for this file is described in src/index.ts
+# The data types for this file are described in src/types.ts.
 
 #
 # Sidebar section
@@ -14,7 +14,7 @@ name: Jane Smith
 bannerTitle: Mrs. Manager
 
 # Information on how to contact you
-# You can use any FontAwesome icons in this section
+# The simple template embeds the five Font Awesome icons shown below.
 contactInfo:
 - value: City, ST
   faIconClass: "fas fa-map-marker-alt"
@@ -97,32 +97,44 @@ profile: |
 # What have you done and where
 experience:
 - company: Recognizable Corporation
-  title: Mrs. Manager
-  timeFrame: 2019 - 2021
-  details:
-  - Lead major team to success through innovative breathing techniques
-  - Use Microsoft Teams in ways the developers could never have forseen
-  - Increased synergy by 37% across four industry verticals
+  timeFrame: 2017 - 2021
+  roles:
+  - title: Mrs. Manager
+    focusArea: Cross-Functional Delivery
+    details:
+    - Led a cross-functional team responsible for product delivery, operational planning, and customer outcomes.
+  - title: Assistant to the Manager
+    details:
+    - Coordinated planning, reporting, and day-to-day execution for a growing department.
 - company: Major Airline
-  title: Ring Leader
   timeFrame: 2018 - 2019
-  details:
+  roles:
+  - title: Ring Leader
+    details:
+    - Kept a distributed operations group aligned through a period of rapid change.
 - company: Cola Factory
-  title: Taste Tester
   timeFrame: 2016 - 2018
-  details:
+  roles:
+  - title: Taste Tester
+    details:
+    - Supported product quality and translated customer feedback into practical improvements.
 - company: Local Business
-  title: Senior Doer
   timeFrame: 2013 - 2018
-  details:
-  - Third best person on my team
-  - Told a pretty funny joke to the CTO at the 2015 holiday party
-  - Was part of a group of 17 people who avoided getting made redundant in 2014
+  roles:
+  - title: Senior Doer
+    details:
+    - Delivered hands-on technical and operational work across several internal initiatives.
 
 # Any interesting projects you want to highlight
 projects:
 - companyType: Retailer
   tagline: Migration to marginally better vendor
+  timeFrame: 2024 - Present
+  link: https://example.com/projects/vendor-migration
+  technologies:
+  - TypeScript
+  - PostgreSQL
+  - Docker
   additionalDetails:
   - Replaced old vendor technology with a new one that does the same thing
   - Worked late nights and weekends, but had Tuesdays off
@@ -142,6 +154,22 @@ projects:
   - Cooked brats and pancakes for the North American Public Sector division
   - Purchased a bounce house for everyone
   - Arranged syncronized 'Lord of the Dance' style competition
+
+# A short technology summary followed by ATS-friendly keywords
+usedTechnologies:
+  headline: A word cloud of technologies I've used to appease the machine scanning this resume.
+  groups:
+  - title: Languages
+    items:
+    - TypeScript
+    - Go
+  - title: Data
+    items:
+    - PostgreSQL
+  - title: Platform
+    items:
+    - Docker
+    - Kubernetes
 
 # Show the "Generated using..." footer
 showGeneratedByFooter: true

@@ -1,0 +1,602 @@
+// Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com
+// Icons licensed under CC BY 4.0: https://fontawesome.com/license/free
+mixin contactIcon(iconClass)
+  if iconClass && (iconClass.includes('fa-map-marker-alt') || iconClass.includes('fa-location-dot'))
+    svg.contact-icon(viewBox='0 0 384 512' aria-hidden='true' focusable='false')
+      path(fill='currentColor' d='M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z')
+  else if iconClass && iconClass.includes('fa-envelope')
+    svg.contact-icon(viewBox='0 0 512 512' aria-hidden='true' focusable='false')
+      path(fill='currentColor' d='M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z')
+  else if iconClass && (iconClass.includes('fa-mobile-alt') || iconClass.includes('fa-mobile-screen-button'))
+    svg.contact-icon(viewBox='0 0 384 512' aria-hidden='true' focusable='false')
+      path(fill='currentColor' d='M16 64C16 28.7 44.7 0 80 0L304 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L80 512c-35.3 0-64-28.7-64-64L16 64zm64 0l0 304 224 0 0-304-224 0zM192 472c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z')
+  else if iconClass && iconClass.includes('fa-globe')
+    svg.contact-icon(viewBox='0 0 512 512' aria-hidden='true' focusable='false')
+      path(fill='currentColor' d='M351.9 280l-190.9 0c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zM160.9 232l190.9 0C349 167.5 334.7 108.1 314.4 64.6 303 40.2 290.7 22.8 279.3 12.2 268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4zm-48 0C116.4 146.4 138.5 66.9 170.8 14.7 78.7 47.3 10.9 131.2 1.5 232l111.4 0zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3L1.5 280zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3l-111.4 0zm111.4-48C501.9 131.2 434.1 47.3 342 14.7 374.3 66.9 396.4 146.4 399.9 232l111.4 0z')
+  else if iconClass && iconClass.includes('fa-linkedin-in')
+    svg.contact-icon(viewBox='0 0 448 512' aria-hidden='true' focusable='false')
+      path(fill='currentColor' d='M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z')
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title #{name}'s Resume
+    style.
+      :root {
+        --ink: #202326;
+        --muted: #5e646b;
+        --rule: #353a40;
+        --paper: #ffffff;
+        --screen: #e9e8e4;
+        --section-space: 5mm;
+        --entry-space: 2.4mm;
+        --content-inset: 4mm;
+      }
+
+      @page {
+        size: A4;
+        margin: 11mm 13mm 12mm;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--screen);
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--screen);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9.5pt;
+        line-height: 1.32;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: #8b8f93;
+        text-decoration-thickness: 0.6pt;
+        text-underline-offset: 1.5pt;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      ul {
+        margin: 0;
+      }
+
+      #resume {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 24px auto;
+        padding: 11mm 13mm 12mm;
+        background: var(--paper);
+      }
+
+      .resume-header {
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
+        align-items: end;
+        gap: 8mm;
+      }
+
+      .name {
+        font-size: 24pt;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+        white-space: nowrap;
+      }
+
+      .headline {
+        margin-top: 0.8mm;
+        color: var(--muted);
+        font-size: 9.8pt;
+        font-weight: 700;
+      }
+
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.7mm;
+        color: var(--muted);
+        font-size: 8.4pt;
+        font-style: normal;
+      }
+
+      .contact-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: flex-end;
+      }
+
+      .contact-item {
+        white-space: nowrap;
+      }
+
+      .contact-item-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 1mm;
+        text-decoration: none;
+      }
+
+      .contact-icon {
+        flex: 0 0 auto;
+        width: 0.92em;
+        height: 0.92em;
+        color: inherit;
+      }
+
+      .contact-value {
+        text-decoration-line: underline;
+        text-decoration-color: #8b8f93;
+        text-decoration-thickness: 0.6pt;
+        text-underline-offset: 1.5pt;
+      }
+
+      .contact-item + .contact-item {
+        margin-left: 3mm;
+        padding-left: 3mm;
+        border-left: 0.5pt solid #a2a5a8;
+      }
+
+      .resume-section {
+        margin-top: var(--section-space);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        break-after: avoid;
+        gap: 3mm;
+        color: var(--ink);
+        font-size: 9pt;
+        font-weight: 700;
+        letter-spacing: 0.075em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .section-title::after {
+        content: "";
+        flex: 1;
+        border-top: 0.7pt solid var(--rule);
+      }
+
+      .section-body {
+        margin-top: 2.6mm;
+        padding-right: var(--content-inset);
+        padding-left: var(--content-inset);
+      }
+
+      .summary {
+        max-width: 170mm;
+      }
+
+      .summary + .summary {
+        margin-top: 1.5mm;
+      }
+
+      .entry {
+        break-inside: avoid;
+      }
+
+      .entry + .entry {
+        margin-top: var(--entry-space);
+      }
+
+      .company-entry {
+        break-inside: auto;
+      }
+
+      .company-entry + .company-entry {
+        margin-top: var(--entry-space);
+      }
+
+      .company-heading {
+        display: flex;
+        align-items: baseline;
+        break-after: avoid;
+        justify-content: flex-start;
+        gap: 2.2mm;
+      }
+
+      .company-name {
+        font-size: 10.6pt;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .company-roles {
+        margin-top: 0.9mm;
+        padding-left: var(--content-inset);
+      }
+
+      .role-entry {
+        break-inside: avoid;
+      }
+
+      .role-entry + .role-entry {
+        margin-top: 1.8mm;
+      }
+
+      .role-entry-compact + .role-entry-compact {
+        margin-top: 0.55mm;
+      }
+
+      .role-heading {
+        display: flex;
+        align-items: baseline;
+        break-after: avoid;
+        justify-content: space-between;
+        gap: 5mm;
+      }
+
+      .role-title {
+        font-size: 9.5pt;
+        line-height: 1.2;
+      }
+
+      .role-title-name {
+        font-weight: 700;
+      }
+
+      .role-focus-area {
+        color: var(--muted);
+        font-size: 9.2pt;
+        font-weight: 400;
+      }
+
+      .entry-heading {
+        display: flex;
+        align-items: baseline;
+        break-after: avoid;
+        justify-content: space-between;
+        gap: 5mm;
+      }
+
+      .entry-title {
+        font-size: 9.8pt;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .entry-organization {
+        margin-top: 0.4mm;
+        color: var(--muted);
+        font-size: 9pt;
+        font-weight: 600;
+      }
+
+      .entry-date {
+        flex: 0 0 auto;
+        color: var(--muted);
+        font-size: 8.7pt;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+
+      .details {
+        margin-top: 1.1mm;
+        padding-left: var(--content-inset);
+        list-style: none;
+      }
+
+      .details li {
+        padding-left: 2.5mm;
+        text-indent: -2.5mm;
+      }
+
+      .details li + li {
+        margin-top: 0.65mm;
+      }
+
+      .role-entry .details {
+        padding-right: var(--content-inset);
+      }
+
+      .skill-title {
+        font-weight: 700;
+      }
+
+      .skill-detail {
+        display: inline;
+      }
+
+      .compact-entry + .compact-entry {
+        margin-top: 1.8mm;
+      }
+
+      .compact-entry {
+        break-inside: avoid;
+      }
+
+      .two-column-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+        column-gap: 8mm;
+        row-gap: 2mm;
+      }
+
+      .two-column-grid .compact-entry {
+        margin-top: 0;
+      }
+
+      .credential-link {
+        display: inline-block;
+        margin-top: 0.5mm;
+        color: var(--muted);
+        font-size: 8.7pt;
+      }
+
+      .project-technologies {
+        margin-top: 0.7mm;
+        color: var(--muted);
+        font-size: 8.7pt;
+      }
+
+      .project-company {
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .technology-label {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .technology-summary {
+        color: var(--muted);
+      }
+
+      .technologies-section {
+        break-inside: avoid;
+      }
+
+      .technology-keywords {
+        margin-top: 1.1mm;
+      }
+
+      .technology-keyword-row {
+        font-weight: 400;
+        line-height: 1.4;
+      }
+
+      .technology-group-title {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .technology-keyword-row + .technology-keyword-row {
+        margin-top: 0.45mm;
+      }
+
+      @media screen and (max-width: 210mm) {
+        #resume {
+          width: 100%;
+          margin: 0;
+          padding: 10mm;
+        }
+
+        .resume-header {
+          grid-template-columns: 1fr;
+          gap: 2mm;
+        }
+
+        .contact-list {
+          align-items: flex-start;
+        }
+
+        .contact-row {
+          display: block;
+        }
+
+        .contact-item {
+          display: block;
+        }
+
+        .contact-item + .contact-item {
+          margin-left: 0;
+          padding-left: 0;
+          border-left: 0;
+        }
+
+        .two-column-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        html,
+        body {
+          background: var(--paper);
+        }
+
+        #resume {
+          width: auto;
+          min-height: 0;
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+  body
+    main#resume
+      header.resume-header
+        .identity-primary
+          h1.name #{name}
+          if bannerTitle
+            p.headline #{bannerTitle}
+        if contactInfo && contactInfo.length
+          address.contact-list(aria-label='Contact information')
+            each info, infoIndex in contactInfo
+              if infoIndex % 2 === 0
+                - const nextInfo = contactInfo[infoIndex + 1]
+                .contact-row
+                  if info.link
+                    a.contact-item.contact-item-link(href=info.link)
+                      if info.faIconClass
+                        +contactIcon(info.faIconClass)
+                      span.contact-value #{info.value}
+                  else
+                    span.contact-item #{info.value}
+                  if nextInfo
+                    if nextInfo.link
+                      a.contact-item.contact-item-link(href=nextInfo.link)
+                        if nextInfo.faIconClass
+                          +contactIcon(nextInfo.faIconClass)
+                        span.contact-value #{nextInfo.value}
+                    else
+                      span.contact-item #{nextInfo.value}
+
+      if profile
+        section.resume-section(aria-labelledby='summary-heading')
+          h2#summary-heading.section-title Profile
+          .section-body
+            if Array.isArray(profile)
+              each detail in profile
+                p.summary #{detail}
+            else
+              p.summary #{profile}
+
+      if keySkills && keySkills.length
+        section.resume-section(aria-labelledby='skills-heading')
+          h2#skills-heading.section-title Relevant Skills
+          .section-body
+            each skill in keySkills
+              p.compact-entry
+                span.skill-title #{skill.title}:&nbsp;
+                span.skill-detail #{skill.details}
+
+      if experience && experience.length
+        section.resume-section(aria-labelledby='experience-heading')
+          h2#experience-heading.section-title Professional Experience
+          .section-body
+            each employer in experience
+              article.company-entry
+                .company-heading
+                  h3.company-name #{employer.company}
+                  if employer.timeFrame
+                    p.entry-date.company-date #{employer.timeFrame}
+                .company-roles
+                  each role in employer.roles
+                    article.role-entry(class=role.details && role.details.length ? 'role-entry-detailed' : 'role-entry-compact')
+                      .role-heading
+                        h4.role-title
+                          span.role-title-name #{role.title}
+                          if role.focusArea
+                            span.role-focus-area
+                              |  - #{role.focusArea}
+                        if !employer.timeFrame && role.timeFrame
+                          p.entry-date #{role.timeFrame}
+                      if role.details && role.details.length
+                        ul.details
+                          each detail in role.details
+                            li #{detail}
+
+      if projects && projects.length
+        section.resume-section(aria-labelledby='projects-heading')
+          h2#projects-heading.section-title Interesting Projects
+          .section-body
+            each project in projects
+              article.entry
+                .entry-heading
+                  div
+                    h3.entry-title
+                      if project.link
+                        a(href=project.link) #{project.tagline}
+                      else
+                        | #{project.tagline}
+                      if project.companyType
+                        span.project-company
+                          |  - #{project.companyType}
+                  if project.timeFrame
+                    p.entry-date #{project.timeFrame}
+                if project.technologies
+                  p.project-technologies
+                    span.technology-label Technologies:&nbsp;
+                    if Array.isArray(project.technologies)
+                      | #{project.technologies.join(', ')}
+                    else
+                      | #{project.technologies}
+                if project.additionalDetails && project.additionalDetails.length
+                  ul.details
+                    each detail in project.additionalDetails
+                      li #{detail}
+
+      if education && education.length
+        section.resume-section(aria-labelledby='education-heading')
+          h2#education-heading.section-title Education
+          .section-body.two-column-grid
+            each degree in education
+              article.compact-entry
+                h3.entry-title #{degree.degree}
+                p.entry-organization #{degree.school}
+                if degree.additionalDetails && degree.additionalDetails.length
+                  ul.details
+                    each detail in degree.additionalDetails
+                      li #{detail}
+
+      if certifications && certifications.length
+        section.resume-section(aria-labelledby='certifications-heading')
+          h2#certifications-heading.section-title Certifications
+          .section-body.two-column-grid
+            each certification in certifications
+              article.compact-entry
+                h3.entry-title #{certification.company}
+                if certification.id
+                  if certification.link
+                    a.credential-link(href=certification.link) #{certification.id}
+                  else
+                    p.credential-link #{certification.id}
+                if certification.list && certification.list.length
+                  ul.details
+                    each individualCertification in certification.list
+                      li #{individualCertification}
+
+      if hobbies && hobbies.length
+        section.resume-section(aria-labelledby='hobbies-heading')
+          h2#hobbies-heading.section-title Hobbies
+          .section-body
+            each hobby in hobbies
+              article.compact-entry
+                h3.entry-title #{hobby.headline}
+                if hobby.additionalDetails && hobby.additionalDetails.length
+                  ul.details
+                    each detail in hobby.additionalDetails
+                      li #{detail}
+
+      - const technologySection = usedTechnologies || technologies
+      - const technologyGroups = technologySection && technologySection.groups ? technologySection.groups : []
+      - const technologyDetails = technologySection && technologySection.additionalDetails ? technologySection.additionalDetails : []
+      if technologySection && (technologyGroups.length || technologyDetails.length)
+        section.resume-section.technologies-section(aria-labelledby='technologies-heading')
+          h2#technologies-heading.section-title Used Technologies
+          .section-body
+            if technologySection.headline
+              p.technology-summary #{technologySection.headline}
+            .technology-keywords
+              if technologyGroups.length
+                each group in technologyGroups
+                  if group.title && group.items && group.items.length
+                    p.technology-keyword-row
+                      span.technology-group-title #{group.title}:&nbsp;
+                      span #{group.items.join(', ')}
+              else
+                each technology in technologyDetails
+                  - const technologyKeywords = technology.trim().replace(/,\s*$/, '')
+                  if technologyKeywords
+                    p.technology-keyword-row #{technologyKeywords}

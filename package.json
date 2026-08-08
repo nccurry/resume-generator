@@ -10,8 +10,9 @@
     "lint": "biome check src puppeteer.config.js package.json tsconfig.json biome.json",
     "format": "biome check --write src puppeteer.config.js package.json tsconfig.json biome.json",
     "generate": "npm run build && node dist/index.js",
-    "smoke": "node dist/index.js --file exampleData.yaml --template green-columns --no-pdf && node dist/index.js --file exampleData.yaml --template man-page --no-pdf",
-    "test": "npm run lint && npm run typecheck && npm run build && npm run smoke",
+    "smoke": "node dist/index.js --file exampleData.yaml --template green-columns --no-pdf && node dist/index.js --file exampleData.yaml --template man-page --no-pdf && node dist/index.js --file exampleData.yaml --template simple --no-pdf",
+    "test:unit": "node --test dist/resume-data.test.js",
+    "test": "npm run lint && npm run typecheck && npm run build && npm run test:unit && npm run smoke",
     "clean": "node --input-type=module -e \"import { existsSync, readdirSync, rmSync } from 'node:fs'; if (existsSync('dist')) for (const entry of readdirSync('dist')) if (entry !== '.gitkeep') rmSync('dist/' + entry, { recursive: true, force: true });\""
   },
   "repository": {

@@ -73,7 +73,7 @@ tasks:
       - '"{{.NODE}}" dist/index.js {{.CLI_ARGS}}'
 
   smoke:
-    desc: Compile and render both templates without launching Chrome
+    desc: Compile and render all templates without launching Chrome
     cmds:
       - task: build
       - '"{{.NPM}}" run smoke'
@@ -81,9 +81,7 @@ tasks:
   check:
     desc: Run all repository validation
     cmds:
-      - task: lint
-      - task: typecheck
-      - task: smoke
+      - '"{{.NPM}}" test'
 
   clean:
     desc: Remove generated output

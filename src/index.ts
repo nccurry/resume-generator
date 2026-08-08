@@ -3,8 +3,9 @@ import * as path from "node:path"
 import pug from "pug"
 import puppeteer, { type PDFOptions } from "puppeteer"
 import yargs from "yargs"
+import { getResumeData } from "./resume-data.js"
 import { type Arguments, isArguments, templateTypes } from "./types.js"
-import { compileHtml, extractFileName, getResumeData } from "./utils.js"
+import { compileHtml, extractFileName } from "./utils.js"
 
 const argv = yargs(process.argv.slice(2))
   .option("template", {
@@ -46,10 +47,17 @@ async function main(arguments_: Arguments): Promise<void> {
   )
   const resumeHtml = compileHtml(compiledFunction, resumeData)
   const fileName = extractFileName(arguments_.file)
-  const localTime = new Date().toLocaleString("en-US", {
-    timeZone: arguments_.timezone,
-  })
-  const timestamp = new Date(localTime).toJSON().slice(0, 10)
+  const dateParts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: arguments_.timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    })
+      .formatToParts(new Date())
+      .map(({ type, value }) => [type, value]),
+  )
+  const timestamp = `${dateParts.year}-${dateParts.month}-${dateParts.day}`
   const outputDirectory = path.join(import.meta.dirname, "../dist")
   const outputBase = path.join(outputDirectory, `${fileName}-${timestamp}`)
 
@@ -63,13 +71,14 @@ async function main(arguments_: Arguments): Promise<void> {
   const pdfOptions: PDFOptions = {
     path: `${outputBase}.pdf`,
     format: "a4",
-    pageRanges: "1",
+    pageRanges: arguments_.template === "simple" ? undefined : "1",
     margin: {
       top: "0px",
       left: "0px",
       right: "0px",
       bottom: "0px",
     },
+    preferCSSPageSize: arguments_.template === "simple",
     printBackground: true,
   }
 

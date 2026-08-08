@@ -1,23 +1,5 @@
-import * as fs from "node:fs"
-import { load } from "js-yaml"
 import type { LocalsObject } from "pug"
 import type { ResumeData } from "./types.js"
-
-/**
- * Reads and parses resume data from a YAML file.
- * `main` uses this before template compilation and reports a fatal CLI error when
- * the file cannot be read or parsed.
- */
-export function getResumeData(file: string): ResumeData {
-  try {
-    const resumeData = load(fs.readFileSync(file, "utf8"))
-    return resumeData as ResumeData
-  } catch (e) {
-    console.error(`There was a problem reading resume data from file ${file}`)
-    console.error(e instanceof Error ? e.message : String(e))
-    process.exit(1)
-  }
-}
 
 /**
  * Applies parsed resume data to a compiled Pug template and returns its HTML.
