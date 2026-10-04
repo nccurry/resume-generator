@@ -132,10 +132,12 @@ html(lang='en')
       }
 
       .contact-icon {
+        display: block;
         flex: 0 0 auto;
         width: 0.92em;
         height: 0.92em;
         color: inherit;
+        transform: translateY(0.06em);
       }
 
       .contact-value {
@@ -182,6 +184,8 @@ html(lang='en')
 
       .summary {
         max-width: 170mm;
+        padding-left: 2.5mm;
+        text-indent: -2.5mm;
       }
 
       .summary + .summary {
@@ -408,6 +412,10 @@ html(lang='en')
           display: block;
         }
 
+        .contact-item-link {
+          display: flex;
+        }
+
         .contact-item + .contact-item {
           margin-left: 0;
           padding-left: 0;
@@ -464,7 +472,7 @@ html(lang='en')
 
       if profile
         section.resume-section(aria-labelledby='summary-heading')
-          h2#summary-heading.section-title Profile
+          h2#summary-heading.section-title Who Am I
           .section-body
             if Array.isArray(profile)
               each detail in profile
